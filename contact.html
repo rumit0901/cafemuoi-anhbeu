@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.png">
+
   <link rel="stylesheet" href="assets/css/style.css">
 
   <style>
@@ -58,14 +64,14 @@
 
   <section style="padding: 150px 0 90px 0;">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-on-scroll">
         <span class="section-subtitle">Dịch Vụ Sỉ & Lẻ Anh Bếu</span>
         <h1 class="section-title">Liên Hệ & Đăng Ký Báo Giá Sỉ</h1>
         <p class="section-description">Gửi yêu cầu báo giá sỉ cà phê muối đóng chai hoặc phản hồi chất lượng dịch vụ</p>
       </div>
 
       <div class="contact-grid">
-        <div style="background: #ffffff; padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+        <div class="reveal-on-scroll" style="background: #ffffff; padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
           <form id="contact-form">
             <div class="form-group">
               <label for="inquiry_type">Mục đích liên hệ *</label>
@@ -115,8 +121,8 @@
           </form>
         </div>
 
-        <div style="display: flex; flex-direction: column; justify-content: center;">
-          <div style="background: #ffffff; padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 24px;">
+        <div class="reveal-on-scroll stagger-2" style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="amber-glow-card" style="background: #ffffff; padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 24px;">
             <h3 style="font-size: 1.3rem; color: var(--primary-coffee); margin-bottom: 16px;">📦 Đăng Ký Đại Lý & Phân Phối Sỉ</h3>
             <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px; line-height: 1.6;">
               Anh Bếu cung cấp sỉ cà phê muối đóng chai 330ml và 500ml ướp lạnh. Giữ trọn bọt kem béo mặn 3-5 ngày trong tủ mát.
@@ -128,7 +134,7 @@
             </ul>
           </div>
 
-          <div style="background: var(--primary-coffee); color: var(--accent-cream); padding: 30px; border-radius: var(--radius-md);">
+          <div class="amber-glow-card" style="background: var(--primary-coffee); color: var(--accent-cream); padding: 30px; border-radius: var(--radius-md);">
             <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 12px;">📞 Hotline Tư Vấn Sỉ & Lẻ Trực Tiếp</h3>
             <p style="font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); margin-bottom: 8px;">0905 382 080</p>
             <p style="font-size: 0.9rem; color: rgba(244, 232, 211, 0.7);">Phục vụ từ 07:00 - 20:30 mỗi ngày (Bao gồm thứ 7 & Chủ Nhật)</p>
@@ -147,6 +153,7 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/api.js"></script>
   <script src="assets/js/pages/contact.page.js"></script>
+  <script src="assets/js/animations.js"></script>
   <script> $('#mobile-menu-toggle').on('click', function() { $('#main-navigation').toggleClass('active'); }); </script>
 </body>
 </html>

@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.png">
+
   <link rel="stylesheet" href="assets/css/style.css">
 
   <style>
@@ -64,7 +70,7 @@
 
   <section style="padding: 150px 0 90px 0;">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-on-scroll">
         <span class="section-subtitle">Blog, Khuyến Mãi & Chính Sách Sỉ</span>
         <h1 class="section-title">Tin Tức & Kinh Nghiệm</h1>
         <p class="section-description">Cập nhật chính sách đại lý, ưu đãi mới nhất và bí kíp thưởng thức cà phê muối</p>
@@ -72,7 +78,7 @@
 
       <div id="blog-container" class="blog-grid">
         <!-- Static Fallback Content cho SEO Crawler -->
-        <article class="blog-card">
+        <article class="blog-card amber-glow-card reveal-on-scroll">
           <div class="blog-img">
             <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80" alt="Chính sách đại lý sỉ">
           </div>
@@ -83,7 +89,7 @@
           </div>
         </article>
 
-        <article class="blog-card">
+        <article class="blog-card amber-glow-card reveal-on-scroll stagger-1">
           <div class="blog-img">
             <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&auto=format&fit=crop&q=80" alt="Mẹo thưởng thức cà phê muối">
           </div>
@@ -109,7 +115,7 @@
 
   <!-- Embed jsRender Template Blog Card -->
   <script type="type/x-jsrender" id="blogCardTemplate">
-    <article class="blog-card">
+    <article class="blog-card amber-glow-card reveal-on-scroll">
       <div class="blog-img">
         <img src="{{:image}}" alt="{{:title}}">
       </div>
@@ -122,6 +128,7 @@
   </script>
 
   <script src="assets/js/pages/blog.page.js"></script>
+  <script src="assets/js/animations.js"></script>
   <script> $('#mobile-menu-toggle').on('click', function() { $('#main-navigation').toggleClass('active'); }); </script>
 </body>
 </html>

@@ -479,4 +479,145 @@ button, input, textarea, select {
   }
 }
 
+/* --------------------------------------------------------------------------
+   9. MODERN ANIMATIONS & MICRO-INTERACTIONS (FEAT: ANIMATION SYSTEM)
+   -------------------------------------------------------------------------- */
+
+/* Trạng thái Header thu gọn khi cuộn trang */
+.site-header.scrolled {
+  top: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 40px rgba(26, 15, 10, 0.12);
+  border-color: rgba(229, 152, 102, 0.4);
+}
+
+.site-header.scrolled .header-inner {
+  height: 58px;
+}
+
+/* Keyframes Chuyển Động */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatSmooth {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes amberPulse {
+  0%, 100% {
+    box-shadow: 0 8px 20px rgba(211, 84, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 14px 30px rgba(211, 84, 0, 0.45);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Scroll Reveal Classes (Sử dụng với IntersectionObserver) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.zoom-in {
+  transform: scale(0.93);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Stagger Delays cho danh sách thẻ */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+
+/* Hiệu ứng Nâng Thẻ & Viền Hổ Phách Phát Sáng */
+.amber-glow-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.amber-glow-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(211, 84, 0, 0.5) !important;
+  box-shadow: 0 20px 45px rgba(211, 84, 0, 0.18) !important;
+}
+
+/* Floating Animation cho Hero Badge */
+.floating-badge {
+  animation: floatSmooth 4s ease-in-out infinite;
+}
+
+/* Button Micro-Interactions */
+.btn-accent {
+  animation: amberPulse 3s infinite;
+}
+
+.btn-accent:hover {
+  animation: none;
+}
+
+/* Subtle Link Underline Animated Effect */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accent-gold);
+  transition: width 0.3s ease, left 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+.nav-link.active::after {
+  display: none;
+}
+
+
 

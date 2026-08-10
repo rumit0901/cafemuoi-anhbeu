@@ -12,6 +12,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
+  
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.png">
+
   <link rel="stylesheet" href="assets/css/style.css">
 
   <style>
@@ -104,7 +110,7 @@
 
   <div class="stores-layout">
     <div class="stores-sidebar">
-      <div class="section-header" style="text-align: left; margin-bottom: 30px;">
+      <div class="section-header reveal-on-scroll" style="text-align: left; margin-bottom: 30px;">
         <span class="section-subtitle">Hệ Thống Chi Nhánh</span>
         <h1 class="section-title" style="font-size: 2.2rem;">Địa Chỉ Cửa Hàng</h1>
         <p class="section-description">Chọn chi nhánh gần bạn nhất để ghé thưởng thức hoặc lấy hàng sỉ trực tiếp</p>
@@ -112,18 +118,18 @@
 
       <div id="stores-list-container">
         <!-- Skeleton Loading State mặc định -->
-        <div class="skeleton-card"><div class="skeleton-box" style="height: 100px;"></div></div>
-        <div class="skeleton-card" style="margin-top: 16px;"><div class="skeleton-box" style="height: 100px;"></div></div>
+        <div class="skeleton-card reveal-on-scroll"><div class="skeleton-box" style="height: 100px;"></div></div>
+        <div class="skeleton-card reveal-on-scroll stagger-1" style="margin-top: 16px;"><div class="skeleton-box" style="height: 100px;"></div></div>
       </div>
     </div>
 
     <!-- Mapbox GL JS Container -->
-    <div id="map-container"></div>
+    <div id="map-container" class="reveal-on-scroll zoom-in"></div>
   </div>
 
   <!-- Embed jsRender Template Cửa Hàng -->
   <script type="text/x-jsrender" id="storeItemTemplate">
-    <div class="store-item-card" data-lat="{{:lat}}" data-lng="{{:lng}}">
+    <div class="store-item-card amber-glow-card reveal-on-scroll" data-lat="{{:lat}}" data-lng="{{:lng}}">
       <h3 class="store-name">{{:name}}</h3>
       <p class="store-address">📍 {{:address}}</p>
       <div class="store-details">
@@ -145,6 +151,7 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/api.js"></script>
   <script src="assets/js/pages/stores.page.js"></script>
+  <script src="assets/js/animations.js"></script>
   <script> $('#mobile-menu-toggle').on('click', function() { $('#main-navigation').toggleClass('active'); }); </script>
 </body>
 </html>
