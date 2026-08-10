@@ -16,7 +16,7 @@
 | **Tài liệu kiến trúc** | `ARCHITECTURE.md` |
 | **Cập nhật lần cuối** | 2026-08-10 |
 | **Cập nhật bởi** | Antigravity AI Agent |
-| **Giai đoạn hiện tại** | 🟢 **Phase 2 — Phát triển Frontend (Cập nhật định hướng sỉ/lẻ)** |
+| **Giai đoạn hiện tại** | 🟢 **Phase 4 — Tích hợp Frontend ↔ Backend** |
 
 ---
 
@@ -25,8 +25,8 @@
 ```
 Phase 1: Thiết kế & Lên cấu trúc                   ✅ HOÀN THÀNH
 Phase 2: Phát triển Frontend (Static HTML/CSS/JS)   ✅ HOÀN THÀNH (Đã bổ sung cấu trúc sỉ/lẻ)
-Phase 3: Phát triển Backend (PHP Slim API + CMS)   ← ĐANG Ở ĐÂY
-Phase 4: Tích hợp Frontend ↔ Backend (Menu Sỉ/Lẻ & Form Đăng ký Đại lý)
+Phase 3: Phát triển Backend (PHP Slim API + CMS)   ✅ HOÀN THÀNH (API REST + CMS Admin + TDD PHPUnit Pass 100%)
+Phase 4: Tích hợp Frontend ↔ Backend               ← ĐANG Ở ĐÂY
 Phase 5: Tối ưu SEO & Performance
 Phase 6: Kiểm thử (TDD / PHPUnit / Jest)
 Phase 7: Deploy & Go Live
@@ -53,70 +53,31 @@ Phase 7: Deploy & Go Live
 - [x] Tạo `story.html`, `blog.html`, `contact.html`
 - [x] Tạo `CNAME` file cho custom domain
 
+### Phase 3 — Phát triển Backend (PHP Slim API + CMS)
+- [x] Khởi tạo PHP Slim Framework 4 & Composer dependencies (`slim/slim`, `slim/psr7`, `php-di/php-di`) trong thư mục [`backend/`](file:///c:/Users/buian/Documents/App/cafemuoi.anhbeu/backend)
+- [x] Xây dựng schema DDL & seed data [`schema.sql`](file:///c:/Users/buian/Documents/App/cafemuoi.anhbeu/backend/schema.sql) hỗ trợ đồng thời MySQL (production) và SQLite (kiểm thử/dev)
+- [x] Cấu hình CorsMiddleware (HTTPS CORS), AuthMiddleware (Guard Admin), JsonBodyParserMiddleware
+- [x] Xây dựng các Public REST API endpoints:
+  - `GET /api/menu`: Danh sách sản phẩm bán lẻ
+  - `GET /api/channels`: Danh sách kênh bán hàng đối tác (ShopeeFood, GrabFood...)
+  - `GET /api/wholesale`: Danh sách sản phẩm & mốc giá sỉ chai đa dung tích (330ml, 500ml và dung tích tùy chỉnh)
+  - `GET /api/stores`: Danh sách cửa hàng & tọa độ bản đồ
+  - `GET /api/reviews`: Đánh giá khách hàng & đại lý
+  - `GET /api/blog`: Bài viết tin tức & chính sách sỉ
+  - `GET /api/story`: Nội dung câu chuyện thương hiệu
+  - `POST /api/contact`: Tiếp nhận form liên hệ & báo giá sỉ (có validation dữ liệu)
+- [x] Xây dựng CMS Admin Panel (`/admin` & `/admin/login`) với tài khoản mặc định `admin`/`admin`
+- [x] Triển khai bộ API CRUD tại `/admin/api/*` cho quản trị viên quản lý kênh bán hàng, thực đơn, gói sỉ và đơn đăng ký
+- [x] Viết bộ kiểm thử TDD tự động [`tests/ApiTest.php`](file:///c:/Users/buian/Documents/App/cafemuoi.anhbeu/backend/tests/ApiTest.php) với PHPUnit 9.6 — **Đạt PASS 100% (3 test cases, 29 assertions)**
 
 ---
 
 ## 📋 Việc cần làm tiếp theo (Next Steps)
 
-### Phase 3 — Backend (PHP Slim API + CMS)
-- [ ] Khởi tạo project PHP Slim Framework (Composer)
-- [ ] Cấu hình CORS cho phép origin GitHub Pages
-- [ ] Thiết kế schema Database MySQL (tables: products, sales_channels, wholesale_packages, stores, reviews, blog_posts, contacts/inquiries)
-- [ ] Implement GET `/api/menu` (danh sách bán lẻ)
-- [ ] Implement GET `/api/channels` (danh sách kênh bán hàng ShopeeFood, GrabFood...)
-- [ ] Implement GET `/api/wholesale` (danh sách gói sỉ & chính sách đại lý)
-- [ ] Implement GET `/api/stores`
-- [ ] Implement GET `/api/reviews`
-- [ ] Implement GET `/api/blog`
-- [ ] Implement POST `/api/contact` (tiếp nhận yêu cầu liên hệ & báo giá sỉ)
-- [ ] Implement CMS Admin Panel (`/admin`) với xác thực (quản lý sản phẩm sỉ/lẻ, CRUD kênh bán hàng bán lẻ & quản lý yêu cầu đại lý)
-
----
-
-## 📁 Cấu trúc file hiện tại (Actual File Tree)
-
-```
-/
-├── .agents/
-│   ├── rules/
-│   │   └── update-status.md  ✅ Quy tắc bắt buộc cập nhật PROJECT_STATUS.md
-│   └── skills/
-│       └── deploy-frontend-github-pages/
-│           └── SKILL.md      ✅ Skill hướng dẫn từng bước deploy frontend lên GitHub Pages
-├── .github/
-│   └── workflows/
-│       └── deploy-frontend.yml ✅ GitHub Actions Workflow tự động deploy thư mục frontend/
-├── ARCHITECTURE.md           ✅ Tài liệu kiến trúc (Đã cập nhật chuẩn Sỉ/Lẻ & CMS Kênh bán hàng)
-├── PROJECT_STATUS.md         ✅ File theo dõi tiến độ (Đã cập nhật chuẩn Sỉ/Lẻ & CMS Kênh bán hàng)
-├── frontend/                 ✅ Mã nguồn Frontend
-│   ├── index.html            ✅ Trang chủ (SEO JSON-LD, Section Bán Sỉ Chai 330ml & Kênh Bán Hàng CMS)
-│   ├── menu.html             ✅ Thực đơn Sỉ & Lẻ (jsRender menu & wholesale templates)
-│   ├── stores.html           ✅ Tìm cửa hàng (Mapbox GL JS)
-│   ├── story.html            ✅ Câu chuyện thương hiệu
-│   ├── reviews.html          ✅ Đánh giá khách hàng & Đại lý
-│   ├── blog.html             ✅ Tin tức, khuyến mãi & chính sách sỉ (jsRender blogTemplate)
-│   ├── contact.html          ✅ Form Đăng ký Báo giá Sỉ & Liên hệ (Select type & wholesale fields)
-│   ├── CNAME                 ✅ Custom domain config
-│   └── assets/
-│       ├── css/
-│       │   └── style.css     ✅ Design System & Styles
-│       └── js/
-│           ├── config.js     ✅ Global CONFIG
-│           ├── api.js        ✅ API Fetch Wrappers (getMenu, getChannels, getWholesale, sendContact...)
-│           ├── animations.js ✅ Engine chuyển động cuộn trang (IntersectionObserver), Header scrolled & 3D Bento tilt
-│           ├── templates/
-│           │   ├── menu.tmpl.html
-│           │   ├── review.tmpl.html
-│           │   └── store.tmpl.html
-│           └── pages/
-│               ├── home.page.js      ✅ Logic trang chủ (channels & wholesale highlight)
-│               ├── menu.page.js      ✅ Logic thực đơn Sỉ & Lẻ
-│               ├── contact.page.js   ✅ Logic form liên hệ & báo giá sỉ
-│               ├── blog.page.js      ✅ Logic tin tức & chính sách đại lý
-│               ├── reviews.page.js   ✅ Logic đánh giá khách hàng
-│               └── stores.page.js    ✅ Logic bản đồ chi nhánh
-└── backend/                  ✅ Thư mục dành riêng cho Backend (PHP Slim)
-```
+### Phase 4 — Tích hợp Frontend ↔ Backend & Deploy
+- [ ] Tích hợp API thực tế giữa Frontend và Backend (`API_BASE_URL`)
+- [ ] Chạy kiểm thử tích hợp E2E
+- [ ] Deploy backend PHP Slim lên server `cafemuoi-anhbeu.great-site.net` & import MySQL schema
 
 ---
 
@@ -126,17 +87,4 @@ Phase 7: Deploy & Go Live
 |---|---|---|
 | 2026-08-10 | Tạo `ARCHITECTURE.md` & `PROJECT_STATUS.md` | Antigravity |
 | 2026-08-10 | Triển khai hoàn tất Phase 2 Frontend (HTML5/CSS3/jQuery/jsRender/Mapbox GL JS) | Antigravity |
-| 2026-08-10 | Cập nhật `ARCHITECTURE.md` & `PROJECT_STATUS.md`: Chuẩn hóa mục đích website quảng bá dịch vụ cung cấp sỉ & lẻ cà phê muối Anh Bếu | Antigravity |
-| 2026-08-10 | Bổ sung cơ chế quản lý kênh bán hàng bán lẻ (ShopeeFood, GrabFood...) từ CMS vào `ARCHITECTURE.md` & `PROJECT_STATUS.md` | Antigravity |
-| 2026-08-10 | Điều chỉnh phạm vi bán sỉ: Trước mắt chỉ tập trung cung cấp sỉ cà phê muối đóng chai với giá sỉ | Antigravity |
-| 2026-08-10 | Cập nhật toàn bộ Frontend theo tài liệu dự án (Tích hợp API channels/wholesale, Section Bán Sỉ Chai 330ml, Form đăng ký báo giá sỉ) | Antigravity |
-| 2026-08-10 | Cập nhật giao diện Minimalism: Bỏ section Must Try trên Trang chủ, tinh giản Thanh Menu Header còn 3 mục chính (Trang Chủ, Câu Chuyện, Liên Hệ) | Antigravity |
-| 2026-08-10 | Động hóa nội dung trang Câu Chuyện (`story.html`) từ CMS API `/api/story` qua `story.page.js` & template jsRender `#storyTemplate` | Antigravity |
-| 2026-08-10 | Xây dựng hệ thống Animations & Micro-Interactions (`assets/js/animations.js`, CSS scroll reveal, 3D Bento tilt, Count-up stats) nâng tầm sinh động cho website | Antigravity |
-| 2026-08-10 | Bổ sung Favicon SVG vector & PNG Apple Touch Icon (`assets/img/favicon.svg`) đồng bộ trên toàn bộ 7 trang HTML | Antigravity |
-| 2026-08-10 | Tạo `.github/workflows/deploy-frontend.yml` (GitHub Actions CI/CD) & Lưu Skill `deploy-frontend-github-pages` trong `.agents/skills` | Antigravity |
-
-
-
-
-
+| 2026-08-10 | Hoàn tất Phase 3 Backend: PHP Slim Framework 4 REST API, CMS Admin Panel, Auth guard & bộ kiểm thử TDD PHPUnit đạt 100% Pass | Antigravity |

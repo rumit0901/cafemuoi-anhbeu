@@ -108,7 +108,7 @@ Backend đảm nhận **2 vai trò chính**:
 |---|---|---|---|
 | GET | `/api/menu` | Danh sản phẩm bán lẻ | `[{ "id": 1, "name": "Cà phê muối truyền thống", "price": 35000, "image": "url", "tag": "best-seller" }]` |
 | GET | `/api/channels` | Danh sách kênh bán hàng (ShopeeFood, GrabFood...) | `[{ "id": 1, "name": "ShopeeFood", "logo": "url", "url": "https://shopeefood.vn/...", "badge": "Đặt Ngay", "active": 1 }]` |
-| GET | `/api/wholesale` | Danh sách sản phẩm cà phê muối đóng chai giá sỉ | `[{ "id": 1, "name": "Cà phê muối đóng chai (Sỉ)", "min_quantity": 5, "price_tier": "Báo giá sỉ", "bottle_size": "330ml" }]` |
+| GET | `/api/wholesale` | Danh sách sản phẩm cà phê muối đóng chai giá sỉ (Đa dung tích: 330ml, 500ml, 1000ml...) | `[{ "id": 1, "name": "Gói Sỉ Dùng Thử 330ml", "min_quantity": 10, "price_tier": "Chiết khấu 15%", "bottle_size": "330ml" }]` |
 | GET | `/api/story` | Nội dung câu chuyện thương hiệu CMS | `{ "title": "...", "subtitle": "...", "image": "...", "paragraphs": ["..."] }` |
 | GET | `/api/stores` | Danh sách chi nhánh | `[{ "id": 1, "name": "Chi nhánh Q1", "address": "...", "lat": 10.7769, "lng": 106.7009 }]` |
 | GET | `/api/reviews` | Đánh giá khách hàng & đại lý | `[{ "id": 1, "customer": "...", "rating": 5, "comment": "...", "type": "wholesale_partner" }]` |
