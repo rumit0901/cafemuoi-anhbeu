@@ -77,6 +77,15 @@ Phase 7: Deploy & Go Live
 
 ```
 /
+├── .agents/
+│   ├── rules/
+│   │   └── update-status.md  ✅ Quy tắc bắt buộc cập nhật PROJECT_STATUS.md
+│   └── skills/
+│       └── deploy-frontend-github-pages/
+│           └── SKILL.md      ✅ Skill hướng dẫn từng bước deploy frontend lên GitHub Pages
+├── .github/
+│   └── workflows/
+│       └── deploy-frontend.yml ✅ GitHub Actions Workflow tự động deploy thư mục frontend/
 ├── ARCHITECTURE.md           ✅ Tài liệu kiến trúc (Đã cập nhật chuẩn Sỉ/Lẻ & CMS Kênh bán hàng)
 ├── PROJECT_STATUS.md         ✅ File theo dõi tiến độ (Đã cập nhật chuẩn Sỉ/Lẻ & CMS Kênh bán hàng)
 ├── frontend/                 ✅ Mã nguồn Frontend
@@ -125,6 +134,8 @@ Phase 7: Deploy & Go Live
 | 2026-08-10 | Động hóa nội dung trang Câu Chuyện (`story.html`) từ CMS API `/api/story` qua `story.page.js` & template jsRender `#storyTemplate` | Antigravity |
 | 2026-08-10 | Xây dựng hệ thống Animations & Micro-Interactions (`assets/js/animations.js`, CSS scroll reveal, 3D Bento tilt, Count-up stats) nâng tầm sinh động cho website | Antigravity |
 | 2026-08-10 | Bổ sung Favicon SVG vector & PNG Apple Touch Icon (`assets/img/favicon.svg`) đồng bộ trên toàn bộ 7 trang HTML | Antigravity |
+| 2026-08-10 | Tạo `.github/workflows/deploy-frontend.yml` (GitHub Actions CI/CD) & Lưu Skill `deploy-frontend-github-pages` trong `.agents/skills` | Antigravity |
+
 
 
 
