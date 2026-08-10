@@ -94,6 +94,7 @@ Phase 7: Deploy & Go Live
 │       └── js/
 │           ├── config.js     ✅ Global CONFIG
 │           ├── api.js        ✅ API Fetch Wrappers (getMenu, getChannels, getWholesale, sendContact...)
+│           ├── animations.js ✅ Engine chuyển động cuộn trang (IntersectionObserver), Header scrolled & 3D Bento tilt
 │           ├── templates/
 │           │   ├── menu.tmpl.html
 │           │   ├── review.tmpl.html
@@ -122,6 +123,9 @@ Phase 7: Deploy & Go Live
 | 2026-08-10 | Cập nhật toàn bộ Frontend theo tài liệu dự án (Tích hợp API channels/wholesale, Section Bán Sỉ Chai 330ml, Form đăng ký báo giá sỉ) | Antigravity |
 | 2026-08-10 | Cập nhật giao diện Minimalism: Bỏ section Must Try trên Trang chủ, tinh giản Thanh Menu Header còn 3 mục chính (Trang Chủ, Câu Chuyện, Liên Hệ) | Antigravity |
 | 2026-08-10 | Động hóa nội dung trang Câu Chuyện (`story.html`) từ CMS API `/api/story` qua `story.page.js` & template jsRender `#storyTemplate` | Antigravity |
+| 2026-08-10 | Xây dựng hệ thống Animations & Micro-Interactions (`assets/js/animations.js`, CSS scroll reveal, 3D Bento tilt, Count-up stats) nâng tầm sinh động cho website | Antigravity |
+| 2026-08-10 | Bổ sung Favicon SVG vector & PNG Apple Touch Icon (`assets/img/favicon.svg`) đồng bộ trên toàn bộ 7 trang HTML | Antigravity |
+
 
 
 

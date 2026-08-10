@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.png">
+
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -31,17 +37,17 @@
   <section style="padding: 150px 0 90px 0; background: #ffffff;">
     <div class="container" style="max-width: 800px;" id="story-container">
       <!-- Static Fallback Content cho SEO Crawler -->
-      <div class="section-header">
+      <div class="section-header reveal-on-scroll">
         <span class="section-subtitle">Hành Trình Thương Hiệu</span>
         <h1 class="section-title">Câu Chuyện Về "Anh Bếu" & Ly Cà Phê Muối Sài Gòn</h1>
       </div>
 
-      <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
+      <div class="reveal-on-scroll stagger-1" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
         <p style="margin-bottom: 20px;">
           Bắt đầu từ một xe cà phê nhỏ ven đường Sài Gòn, <strong>Cà Phê Muối Anh Bếu</strong> ra đời với niềm đam mê cháy bỏng: biến ly cà phê truyền thống trở nên thú vị, mộc mạc mà tràn đầy cảm xúc.
         </p>
 
-        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=900&auto=format&fit=crop&q=80" alt="Hạt cà phê rang mộc" style="border-radius: var(--radius-md); margin: 30px 0; width: 100%;">
+        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=900&auto=format&fit=crop&q=80" alt="Hạt cà phê rang mộc" class="reveal-on-scroll zoom-in" style="border-radius: var(--radius-md); margin: 30px 0; width: 100%;">
 
         <h2 style="color: var(--primary-coffee); margin-bottom: 14px;">Bí Quyết Nằm Ở Lớp Kem Muối Sánh Béo</h2>
         <p style="margin-bottom: 20px;">
@@ -67,22 +73,23 @@
 
   <!-- Template jsRender render nội dung động từ CMS -->
   <script type="text/x-jsrender" id="storyTemplate">
-    <div class="section-header">
+    <div class="section-header reveal-on-scroll">
       <span class="section-subtitle">{{:subtitle}}</span>
       <h1 class="section-title">{{:title}}</h1>
     </div>
 
-    <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
+    <div class="reveal-on-scroll stagger-1" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
       {{for paragraphs}}
         <p style="margin-bottom: 20px;">{{:*#data}}</p>
         {{if #index === 0 && ~root.image}}
-          <img src="{{:~root.image}}" alt="{{:~root.title}}" style="border-radius: var(--radius-md); margin: 30px 0; width: 100%;">
+          <img src="{{:~root.image}}" alt="{{:~root.title}}" class="reveal-on-scroll zoom-in" style="border-radius: var(--radius-md); margin: 30px 0; width: 100%;">
         {{/if}}
       {{/for}}
     </div>
   </script>
 
   <script src="assets/js/pages/story.page.js"></script>
+  <script src="assets/js/animations.js"></script>
   <script> $('#mobile-menu-toggle').on('click', function() { $('#main-navigation').toggleClass('active'); }); </script>
 </body>
 </html>

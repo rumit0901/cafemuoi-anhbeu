@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.png">
+
   <link rel="stylesheet" href="assets/css/style.css">
 
   <style>
@@ -44,14 +50,14 @@
 
   <section style="padding: 60px 0;">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-on-scroll">
         <span class="section-subtitle">Góc Nhận Xét</span>
         <h1 class="section-title">Khách Hàng Nói Gì Về Anh Bếu?</h1>
       </div>
 
       <div id="reviews-container" class="reviews-grid">
-        <div class="skeleton-card"><div class="skeleton-box" style="height: 100px;"></div></div>
-        <div class="skeleton-card"><div class="skeleton-box" style="height: 100px;"></div></div>
+        <div class="skeleton-card reveal-on-scroll"><div class="skeleton-box" style="height: 100px;"></div></div>
+        <div class="skeleton-card reveal-on-scroll stagger-1"><div class="skeleton-box" style="height: 100px;"></div></div>
       </div>
     </div>
   </section>
@@ -68,7 +74,7 @@
 
   <!-- Embed jsRender Template Reviews -->
   <script type="text/x-jsrender" id="reviewTemplate">
-    <div class="review-card">
+    <div class="review-card amber-glow-card reveal-on-scroll">
       <div class="review-header">
         <div class="customer-avatar"><img src="{{:avatar}}" alt="{{:customer}}"></div>
         <div>
@@ -82,6 +88,7 @@
   </script>
 
   <script src="assets/js/pages/reviews.page.js"></script>
+  <script src="assets/js/animations.js"></script>
   <script> $('#mobile-menu-toggle').on('click', function() { $('#main-navigation').toggleClass('active'); }); </script>
 </body>
 </html>

@@ -12,6 +12,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.png">
+
   <link rel="stylesheet" href="assets/css/style.css">
 
   <style>
@@ -80,7 +86,7 @@
   </header>
 
   <!-- BANNER -->
-  <section class="page-banner">
+  <section class="page-banner reveal-on-scroll">
     <div class="container">
       <h1>Thực Đơn Cà Phê Sỉ & Lẻ</h1>
       <p>Khám phá ly cà phê muối pha chế chuẩn vị tại chỗ hoặc dịch vụ cung cấp sỉ đóng chai tận nơi</p>
@@ -90,16 +96,16 @@
   <!-- RETAIL MENU SECTION -->
   <section style="padding: 60px 0 30px 0;">
     <div class="container">
-      <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+      <div class="section-header reveal-on-scroll" style="text-align: left; margin-bottom: 20px;">
         <span class="section-subtitle">Phục Vụ Tại Quán & Giao Tận Nơi</span>
         <h2 class="section-title">1. Thực Đơn Bán Lẻ (Pha Chế Tươi)</h2>
       </div>
 
       <div id="menu-container" class="menu-grid">
         <!-- Skeleton Loading State mặc định -->
-        <div class="skeleton-card"><div class="skeleton-box" style="height: 180px; margin-bottom: 12px;"></div><div class="skeleton-box" style="height: 24px; width: 70%;"></div></div>
-        <div class="skeleton-card"><div class="skeleton-box" style="height: 180px; margin-bottom: 12px;"></div><div class="skeleton-box" style="height: 24px; width: 70%;"></div></div>
-        <div class="skeleton-card"><div class="skeleton-box" style="height: 180px; margin-bottom: 12px;"></div><div class="skeleton-box" style="height: 24px; width: 70%;"></div></div>
+        <div class="skeleton-card reveal-on-scroll"><div class="skeleton-box" style="height: 180px; margin-bottom: 12px;"></div><div class="skeleton-box" style="height: 24px; width: 70%;"></div></div>
+        <div class="skeleton-card reveal-on-scroll stagger-1"><div class="skeleton-box" style="height: 180px; margin-bottom: 12px;"></div><div class="skeleton-box" style="height: 24px; width: 70%;"></div></div>
+        <div class="skeleton-card reveal-on-scroll stagger-2"><div class="skeleton-box" style="height: 180px; margin-bottom: 12px;"></div><div class="skeleton-box" style="height: 24px; width: 70%;"></div></div>
       </div>
     </div>
   </section>
@@ -107,7 +113,7 @@
   <!-- WHOLESALE MENU SECTION -->
   <section style="padding: 50px 0 80px 0; background: #fffcf8; border-top: 1px solid #e6d7c3; border-bottom: 1px solid #e6d7c3;">
     <div class="container">
-      <div class="section-header" style="text-align: left; margin-bottom: 30px;">
+      <div class="section-header reveal-on-scroll" style="text-align: left; margin-bottom: 30px;">
         <span class="section-subtitle">Dành Cho Quán Cafe, Sự Kiện & Đại Lý</span>
         <h2 class="section-title">2. Cung Cấp Sỉ Cà Phê Muối Đóng Chai</h2>
         <p class="section-description">Cà phê muối đóng chai ướp lạnh công thức chuẩn Anh Bếu, chiết khấu sỉ cực cao cho các đối tác phân phối.</p>
@@ -115,7 +121,7 @@
 
       <div id="wholesale-menu-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
         <!-- Fallback Tĩnh -->
-        <div style="background: #ffffff; padding: 24px; border-radius: 16px; border: 2px dashed #d35400;">
+        <div class="amber-glow-card reveal-on-scroll" style="background: #ffffff; padding: 24px; border-radius: 16px; border: 2px dashed #d35400;">
           <span style="background: #d35400; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">🍾 Chai 330ml</span>
           <h3 style="font-size: 1.3rem; color: var(--primary-coffee); margin: 14px 0 8px 0;">Cà Phê Muối Đóng Chai 330ml</h3>
           <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px;">Pha sẵn bảo quản lạnh 3-5 ngày, phục vụ nhanh lẹ cho sự kiện, tiệc tùng hoặc bán kèm tại quán.</p>
@@ -143,7 +149,7 @@
 
   <!-- Include Template jsRender Menu Bán Lẻ -->
   <script type="text/x-jsrender" id="menuItemTemplate">
-    <div class="menu-item-card">
+    <div class="menu-item-card amber-glow-card reveal-on-scroll">
       <div class="card-img-wrapper">
         <img src="{{:image}}" alt="{{:name}}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500&auto=format&fit=crop&q=80'">
         {{if tag}}
@@ -165,7 +171,7 @@
 
   <!-- Include Template jsRender Menu Bán Sỉ -->
   <script type="text/x-jsrender" id="wholesaleCardTemplate">
-    <div style="background: #ffffff; padding: 24px; border-radius: 16px; border: 2px dashed #d35400;">
+    <div class="amber-glow-card reveal-on-scroll" style="background: #ffffff; padding: 24px; border-radius: 16px; border: 2px dashed #d35400;">
       <span style="background: #d35400; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">🍾 {{:bottle_size}}</span>
       <h3 style="font-size: 1.3rem; color: var(--primary-coffee); margin: 14px 0 8px 0;">{{:name}}</h3>
       <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px;">{{:description}}</p>
@@ -175,6 +181,7 @@
   </script>
 
   <script src="assets/js/pages/menu.page.js"></script>
+  <script src="assets/js/animations.js"></script>
   <script>
     $('#mobile-menu-toggle').on('click', function() { $('#main-navigation').toggleClass('active'); });
   </script>
