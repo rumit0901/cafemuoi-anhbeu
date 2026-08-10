@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Câu Chuyện Thương Hiệu — Cà Phê Muối Anh Bếu</title>
+  <meta name="description" content="Hành trình sáng tạo nên hương vị Cà phê muối anh Bếu độc đáo tại Sài Gòn. Tình yêu với hạt cà phê Robusta và khát vọng mang niềm vui tới khách hàng.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/img/logo.png" alt="Cà phê muối anh Bếu Logo" class="logo-img" onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), {className: 'logo-icon', innerHTML: '☕'}));">
+        <span>Cà phê muối anh Bếu</span>
+      </a>
+      <nav class="main-nav" id="main-navigation">
+        <a href="index.html" class="nav-link">Trang Chủ</a>
+        <a href="story.html" class="nav-link active">Câu Chuyện</a>
+        <a href="contact.html" class="nav-link">Liên Hệ</a>
+      </nav>
+      <button class="mobile-toggle" id="mobile-menu-toggle">☰</button>
+    </div>
+  </header>
+
+  <!-- CONTENT (DYNAMIC CMS / API / FALLBACK) -->
+  <section style="padding: 150px 0 90px 0; background: #ffffff;">
+    <div class="container" style="max-width: 800px;" id="story-container">
+      <!-- Static Fallback Content cho SEO Crawler -->
+      <div class="section-header">
+        <span class="section-subtitle">Hành Trình Thương Hiệu</span>
+        <h1 class="section-title">Câu Chuyện Về "Anh Bếu" & Ly Cà Phê Muối Sài Gòn</h1>
+      </div>
+
+      <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
+        <p style="margin-bottom: 20px;">
+          Bắt đầu từ một xe cà phê nhỏ ven đường Sài Gòn, <strong>Cà Phê Muối Anh Bếu</strong> ra đời với niềm đam mê cháy bỏng: biến ly cà phê truyền thống trở nên thú vị, mộc mạc mà tràn đầy cảm xúc.
+        </p>
+
+        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=900&auto=format&fit=crop&q=80" alt="Hạt cà phê rang mộc" style="border-radius: var(--radius-md); margin: 30px 0; width: 100%;">
+
+        <h2 style="color: var(--primary-coffee); margin-bottom: 14px;">Bí Quyết Nằm Ở Lớp Kem Muối Sánh Béo</h2>
+        <p style="margin-bottom: 20px;">
+          Không sử dụng chất tạo béo công nghiệp, lớp bọt kem muối của Anh Bếu được đánh thủ công mỗi ngày từ sữa tươi nguyên chất kết hợp với muối biển tinh khiết. Vị mặn nhẹ thanh tao tôn lên độ đậm đà của từng giọt cà phê Robusta Tây Nguyên.
+        </p>
+
+        <p style="margin-bottom: 20px;">
+          Đến nay, hệ thống <strong>Cà Phê Muối Anh Bếu</strong> tự hào đón hàng nghìn lượt khách mỗi ngày, trở thành điểm đến quen thuộc của giới trẻ và giới văn phòng yêu hương vị cà phê mặn mòi đầy cá tính.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container"><div class="footer-bottom"><p>&copy; 2026 Cà Phê Muối Anh Bếu. All rights reserved.</p></div></div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+
+  <!-- Template jsRender render nội dung động từ CMS -->
+  <script type="text/x-jsrender" id="storyTemplate">
+    <div class="section-header">
+      <span class="section-subtitle">{{:subtitle}}</span>
+      <h1 class="section-title">{{:title}}</h1>
+    </div>
+
+    <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
+      {{for paragraphs}}
+        <p style="margin-bottom: 20px;">{{:*#data}}</p>
+        {{if #index === 0 && ~root.image}}
+          <img src="{{:~root.image}}" alt="{{:~root.title}}" style="border-radius: var(--radius-md); margin: 30px 0; width: 100%;">
+        {{/if}}
+      {{/for}}
+    </div>
+  </script>
+
+  <script src="assets/js/pages/story.page.js"></script>
+  <script> $('#mobile-menu-toggle').on('click', function() { $('#main-navigation').toggleClass('active'); }); </script>
+</body>
+</html>
