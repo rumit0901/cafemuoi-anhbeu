@@ -31,6 +31,7 @@
         tr:last-child td { border-bottom: none; }
         .badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; display: inline-block; }
         .badge-active { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+        .badge-inactive { background: rgba(239, 68, 68, 0.2); color: #f87171; }
         .badge-new { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
         .badge-contacted { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
         
@@ -123,6 +124,7 @@
                             <th>Tối Thiểu</th>
                             <th>Mốc Giá Sỉ</th>
                             <th>Badge</th>
+                            <th>Trạng Thái</th>
                             <th>Thao Tác</th>
                         </tr>
                     </thead>
@@ -167,6 +169,8 @@
     </div>
 
     <script>
+        window.channelsDataCache = [];
+        window.productsDataCache = [];
         window.wholesaleDataCache = [];
 
         function switchTab(tabName) {
@@ -191,39 +195,52 @@
         async function loadChannels() {
             const res = await fetch('/admin/api/channels');
             const data = await res.json();
+            window.channelsDataCache = data;
             const tbody = document.getElementById('channelsTableBody');
-            tbody.innerHTML = data.map(c => `
+            tbody.innerHTML = data.map(c => {
+                const isActive = Number(c.active) === 1;
+                return `
                 <tr>
                     <td>${c.id}</td>
                     <td><strong>${c.name}</strong></td>
                     <td><a href="${c.url}" target="_blank" style="color:#60a5fa;">${c.url}</a></td>
-                    <td><span class="badge badge-active">${c.badge || '-'}</span></td>
-                    <td>${c.display_order}</td>
-                    <td><span class="badge badge-active">${c.active ? 'Bật' : 'Tắt'}</span></td>
+                    <td><span class="badge badge-contacted">${c.badge || '-'}</span></td>
+                    <td>${c.display_order ?? 0}</td>
+                    <td>${isActive ? '<span class="badge badge-active">Bật</span>' : '<span class="badge badge-inactive">Tắt</span>'}</td>
                     <td>
+                        <button onclick="openEditChannelModal(${c.id})" style="background:#3b82f6; border:none; color:#fff; padding:6px 12px; border-radius:4px; cursor:pointer; margin-right:4px;">Sửa</button>
                         <button onclick="deleteChannel(${c.id})" style="background:#ef4444; border:none; color:#fff; padding:6px 12px; border-radius:4px; cursor:pointer;">Xóa</button>
                     </td>
                 </tr>
-            `).join('');
+            `;
+            }).join('');
         }
 
         // LOAD PRODUCTS
         async function loadProducts() {
             const res = await fetch('/admin/api/products');
             const data = await res.json();
+            window.productsDataCache = data;
             const tbody = document.getElementById('productsTableBody');
-            tbody.innerHTML = data.map(p => `
+            tbody.innerHTML = data.map(p => {
+                const isActive = Number(p.active) === 1;
+                const priceFormatted = (Number(p.price) || 0).toLocaleString('vi-VN') + ' đ';
+                const tagBadge = p.tag ? `<span class="badge badge-contacted">${p.tag}</span>` : '-';
+                const imgHtml = p.image ? `<img src="${p.image}" style="width:28px; height:28px; object-fit:cover; border-radius:4px; vertical-align:middle; margin-right:6px;" alt="">` : '<span style="margin-right:6px;">🍹</span>';
+                return `
                 <tr>
                     <td>${p.id}</td>
-                    <td><strong>${p.name}</strong></td>
-                    <td>${(p.price).toLocaleString('vi-VN')} đ</td>
-                    <td>${p.tag || '-'}</td>
-                    <td><span class="badge badge-active">${p.active ? 'Bật' : 'Tắt'}</span></td>
+                    <td>${imgHtml}<strong>${p.name}</strong></td>
+                    <td>${priceFormatted}</td>
+                    <td>${tagBadge}</td>
+                    <td>${isActive ? '<span class="badge badge-active">Bật</span>' : '<span class="badge badge-inactive">Tắt</span>'}</td>
                     <td>
+                        <button onclick="openEditProductModal(${p.id})" style="background:#3b82f6; border:none; color:#fff; padding:6px 12px; border-radius:4px; cursor:pointer; margin-right:4px;">Sửa</button>
                         <button onclick="deleteProduct(${p.id})" style="background:#ef4444; border:none; color:#fff; padding:6px 12px; border-radius:4px; cursor:pointer;">Xóa</button>
                     </td>
                 </tr>
-            `).join('');
+            `;
+            }).join('');
         }
 
         // LOAD WHOLESALE
@@ -232,20 +249,24 @@
             const data = await res.json();
             window.wholesaleDataCache = data;
             const tbody = document.getElementById('wholesaleTableBody');
-            tbody.innerHTML = data.map(w => `
+            tbody.innerHTML = data.map(w => {
+                const isActive = Number(w.active) === 1;
+                return `
                 <tr>
                     <td>${w.id}</td>
                     <td><strong>${w.name}</strong></td>
                     <td><span style="background:#334155; color:#38bdf8; padding:3px 8px; border-radius:12px; font-weight:bold; font-size:0.85rem;">📦 ${w.bottle_size || '330ml'}</span></td>
-                    <td>Từ ${w.min_quantity} chai</td>
-                    <td><strong style="color:#f59e0b;">${w.price_tier}</strong></td>
+                    <td>Từ ${w.min_quantity || 1} chai</td>
+                    <td><strong style="color:#f59e0b;">${w.price_tier || '-'}</strong></td>
                     <td><span class="badge badge-contacted">${w.badge || '-'}</span></td>
+                    <td>${isActive ? '<span class="badge badge-active">Bật</span>' : '<span class="badge badge-inactive">Tắt</span>'}</td>
                     <td>
                         <button onclick="openEditWholesaleModal(${w.id})" style="background:#3b82f6; border:none; color:#fff; padding:6px 12px; border-radius:4px; cursor:pointer; margin-right:4px;">Sửa</button>
                         <button onclick="deleteWholesale(${w.id})" style="background:#ef4444; border:none; color:#fff; padding:6px 12px; border-radius:4px; cursor:pointer;">Xóa</button>
                     </td>
                 </tr>
-            `).join('');
+            `;
+            }).join('');
         }
 
         // LOAD CONTACTS
@@ -253,6 +274,12 @@
             const res = await fetch('/admin/api/contacts');
             const data = await res.json();
             const tbody = document.getElementById('contactsTableBody');
+            const statusBadgeMap = {
+                'new': '<span class="badge badge-new">Mới</span>',
+                'contacted': '<span class="badge badge-contacted">Đã gọi điện</span>',
+                'quoted': '<span class="badge badge-contacted">Đã báo giá</span>',
+                'completed': '<span class="badge badge-active">Hoàn tất</span>'
+            };
             tbody.innerHTML = data.map(ct => `
                 <tr>
                     <td>${ct.id}</td>
@@ -261,7 +288,7 @@
                     <td>${ct.email || '-'}</td>
                     <td><strong style="color:#4ade80;">${ct.expected_quantity || 0} chai</strong></td>
                     <td>${ct.message || '-'}</td>
-                    <td><span class="badge badge-contacted">${ct.status}</span></td>
+                    <td>${statusBadgeMap[ct.status] || `<span class="badge badge-new">${ct.status}</span>`}</td>
                     <td>
                         <select onchange="updateContactStatus(${ct.id}, this.value)" style="background:#0f172a; color:#fff; border:1px solid #334155; padding:4px 8px; border-radius:4px;">
                             <option value="new" ${ct.status === 'new' ? 'selected' : ''}>Mới</option>
@@ -312,19 +339,57 @@
             document.getElementById('modalTitle').textContent = 'Thêm Kênh Bán Hàng Mới';
             document.getElementById('modalFormContent').innerHTML = `
                 <div class="modal-field"><label>Tên Kênh (ShopeeFood, GrabFood...)</label><input type="text" id="m_name" required></div>
+                <div class="modal-field"><label>Đường Dẫn Logo (Ví dụ: /assets/images/shopeefood.png)</label><input type="text" id="m_logo" placeholder="/assets/images/shopeefood.png"></div>
                 <div class="modal-field"><label>Đường Link Gian Hàng</label><input type="text" id="m_url" required></div>
                 <div class="modal-field"><label>Badge Hiển Thị (vd: Đặt Ngay, Freeship)</label><input type="text" id="m_badge" value="Đặt Ngay"></div>
                 <div class="modal-field"><label>Thứ Tự Sắp Xếp</label><input type="number" id="m_order" value="1"></div>
             `;
             document.getElementById('btnModalSave').onclick = async () => {
                 const name = document.getElementById('m_name').value;
+                const logo = document.getElementById('m_logo').value;
                 const url = document.getElementById('m_url').value;
                 const badge = document.getElementById('m_badge').value;
                 const display_order = parseInt(document.getElementById('m_order').value) || 1;
                 await fetch('/admin/api/channels', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, url, badge, display_order, active: 1 })
+                    body: JSON.stringify({ name, logo, url, badge, display_order, active: 1 })
+                });
+                closeModal();
+                loadChannels();
+            };
+            document.getElementById('modalOverlay').style.display = 'flex';
+        }
+
+        function openEditChannelModal(id) {
+            const item = window.channelsDataCache.find(c => c.id == id);
+            if (!item) return;
+
+            document.getElementById('modalTitle').textContent = `Chỉnh Sửa Kênh Bán Hàng (ID #${item.id})`;
+            document.getElementById('modalFormContent').innerHTML = `
+                <div class="modal-field"><label>Tên Kênh (ShopeeFood, GrabFood...)</label><input type="text" id="m_name" value="${(item.name || '').replace(/"/g, '&quot;')}" required></div>
+                <div class="modal-field"><label>Đường Dẫn Logo (Ví dụ: /assets/images/shopeefood.png)</label><input type="text" id="m_logo" value="${(item.logo || '').replace(/"/g, '&quot;')}"></div>
+                <div class="modal-field"><label>Đường Link Gian Hàng</label><input type="text" id="m_url" value="${(item.url || '').replace(/"/g, '&quot;')}" required></div>
+                <div class="modal-field"><label>Badge Hiển Thị (vd: Đặt Ngay, Freeship)</label><input type="text" id="m_badge" value="${(item.badge || '').replace(/"/g, '&quot;')}"></div>
+                <div class="modal-field"><label>Thứ Tự Sắp Xếp</label><input type="number" id="m_order" value="${item.display_order ?? 1}"></div>
+                <div class="modal-field"><label>Trạng Thái</label>
+                    <select id="m_active" style="width:100%; padding:8px; background:#0f172a; color:#fff; border:1px solid #334155; border-radius:4px;">
+                        <option value="1" ${item.active == 1 ? 'selected' : ''}>Bật (Hiển thị)</option>
+                        <option value="0" ${item.active == 0 ? 'selected' : ''}>Tắt (Ẩn)</option>
+                    </select>
+                </div>
+            `;
+            document.getElementById('btnModalSave').onclick = async () => {
+                const name = document.getElementById('m_name').value;
+                const logo = document.getElementById('m_logo').value;
+                const url = document.getElementById('m_url').value;
+                const badge = document.getElementById('m_badge').value;
+                const display_order = parseInt(document.getElementById('m_order').value) || 1;
+                const active = parseInt(document.getElementById('m_active').value) || 0;
+                await fetch('/admin/api/channels/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, logo, url, badge, display_order, active })
                 });
                 closeModal();
                 loadChannels();
@@ -356,22 +421,45 @@
             document.getElementById('modalOverlay').style.display = 'flex';
         }
 
+        function openEditProductModal(id) {
+            const item = window.productsDataCache.find(p => p.id == id);
+            if (!item) return;
+
+            document.getElementById('modalTitle').textContent = `Chỉnh Sửa Món Bán Lẻ (ID #${item.id})`;
+            document.getElementById('modalFormContent').innerHTML = `
+                <div class="modal-field"><label>Tên Món</label><input type="text" id="m_pname" value="${(item.name || '').replace(/"/g, '&quot;')}" required></div>
+                <div class="modal-field"><label>Giá Bán (VNĐ)</label><input type="number" id="m_pprice" value="${item.price}"></div>
+                <div class="modal-field"><label>Tag (Best-Seller, Must-Try...)</label><input type="text" id="m_ptag" value="${(item.tag || '').replace(/"/g, '&quot;')}"></div>
+                <div class="modal-field"><label>Mô Tả Sản Phẩm</label><textarea id="m_pdesc" rows="3">${item.description || ''}</textarea></div>
+                <div class="modal-field"><label>Trạng Thái</label>
+                    <select id="m_pactive" style="width:100%; padding:8px; background:#0f172a; color:#fff; border:1px solid #334155; border-radius:4px;">
+                        <option value="1" ${item.active == 1 ? 'selected' : ''}>Bật (Hiển thị)</option>
+                        <option value="0" ${item.active == 0 ? 'selected' : ''}>Tắt (Ẩn)</option>
+                    </select>
+                </div>
+            `;
+            document.getElementById('btnModalSave').onclick = async () => {
+                const name = document.getElementById('m_pname').value;
+                const price = parseInt(document.getElementById('m_pprice').value) || 0;
+                const tag = document.getElementById('m_ptag').value;
+                const description = document.getElementById('m_pdesc').value;
+                const active = parseInt(document.getElementById('m_pactive').value) || 0;
+                await fetch('/admin/api/products/' + id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, price, tag, description, active })
+                });
+                closeModal();
+                loadProducts();
+            };
+            document.getElementById('modalOverlay').style.display = 'flex';
+        }
+
         function openWholesaleModal() {
             document.getElementById('modalTitle').textContent = 'Thêm Gói Sỉ Đóng Chai Mới';
             document.getElementById('modalFormContent').innerHTML = `
                 <div class="modal-field"><label>Tên Gói Sỉ</label><input type="text" id="m_wname" placeholder="vd: Gói Sỉ Chai 500ml Đại Lý" required></div>
-                <div class="modal-field">
-                    <label>Dung Tích Chai</label>
-                    <div style="display:flex; gap:8px;">
-                        <select id="m_wsize_select" style="padding:8px; border-radius:4px; background:#0f172a; color:#fff; border:1px solid #334155;" onchange="if(this.value !== 'custom') document.getElementById('m_wsize').value = this.value">
-                            <option value="330ml" selected>330ml</option>
-                            <option value="500ml">500ml</option>
-                            <option value="1000ml">1000ml (1L)</option>
-                            <option value="custom">Nhập khác...</option>
-                        </select>
-                        <input type="text" id="m_wsize" value="330ml" placeholder="vd: 330ml, 500ml, 1L..." required style="flex:1;">
-                    </div>
-                </div>
+                <div class="modal-field"><label>Dung Tích Chai</label><input type="text" id="m_wsize" value="330ml" placeholder="vd: 330ml, 500ml, 1L..." required></div>
                 <div class="modal-field"><label>Số Lượng Tối Thiểu (Chai)</label><input type="number" id="m_wmin" value="10"></div>
                 <div class="modal-field"><label>Mốc Giá / Chiết Khấu</label><input type="text" id="m_wtier" placeholder="vd: Chiết khấu 20%" required></div>
                 <div class="modal-field"><label>Badge Hiển Thị</label><input type="text" id="m_wbadge" value="Chiết Khấu Cao"></div>
@@ -396,31 +484,23 @@
         }
 
         function openEditWholesaleModal(id) {
-            const item = window.wholesaleDataCache.find(w => w.id === id);
+            const item = window.wholesaleDataCache.find(w => w.id == id);
             if (!item) return;
-
-            const isPresetSize = ['330ml', '500ml', '1000ml'].includes(item.bottle_size);
-            const selectValue = isPresetSize ? item.bottle_size : 'custom';
 
             document.getElementById('modalTitle').textContent = `Chỉnh Sửa Gói Sỉ (ID #${item.id})`;
             document.getElementById('modalFormContent').innerHTML = `
-                <div class="modal-field"><label>Tên Gói Sỉ</label><input type="text" id="m_wname" value="${item.name.replace(/"/g, '&quot;')}" required></div>
-                <div class="modal-field">
-                    <label>Dung Tích Chai</label>
-                    <div style="display:flex; gap:8px;">
-                        <select id="m_wsize_select" style="padding:8px; border-radius:4px; background:#0f172a; color:#fff; border:1px solid #334155;" onchange="if(this.value !== 'custom') document.getElementById('m_wsize').value = this.value">
-                            <option value="330ml" ${selectValue === '330ml' ? 'selected' : ''}>330ml</option>
-                            <option value="500ml" ${selectValue === '500ml' ? 'selected' : ''}>500ml</option>
-                            <option value="1000ml" ${selectValue === '1000ml' ? 'selected' : ''}>1000ml (1L)</option>
-                            <option value="custom" ${selectValue === 'custom' ? 'selected' : ''}>Nhập khác...</option>
-                        </select>
-                        <input type="text" id="m_wsize" value="${(item.bottle_size || '330ml').replace(/"/g, '&quot;')}" placeholder="vd: 330ml, 500ml, 1L..." required style="flex:1;">
-                    </div>
-                </div>
-                <div class="modal-field"><label>Số Lượng Tối Thiểu (Chai)</label><input type="number" id="m_wmin" value="${item.min_quantity}"></div>
+                <div class="modal-field"><label>Tên Gói Sỉ</label><input type="text" id="m_wname" value="${(item.name || '').replace(/"/g, '&quot;')}" required></div>
+                <div class="modal-field"><label>Dung Tích Chai</label><input type="text" id="m_wsize" value="${(item.bottle_size || '330ml').replace(/"/g, '&quot;')}" placeholder="vd: 330ml, 500ml, 1L..." required></div>
+                <div class="modal-field"><label>Số Lượng Tối Thiểu (Chai)</label><input type="number" id="m_wmin" value="${item.min_quantity ?? 10}"></div>
                 <div class="modal-field"><label>Mốc Giá / Chiết Khấu</label><input type="text" id="m_wtier" value="${(item.price_tier || '').replace(/"/g, '&quot;')}" required></div>
                 <div class="modal-field"><label>Badge Hiển Thị</label><input type="text" id="m_wbadge" value="${(item.badge || '').replace(/"/g, '&quot;')}"></div>
                 <div class="modal-field"><label>Mô Tả Gói Sỉ</label><textarea id="m_wdesc" rows="2">${item.description || ''}</textarea></div>
+                <div class="modal-field"><label>Trạng Thái</label>
+                    <select id="m_wactive" style="width:100%; padding:8px; background:#0f172a; color:#fff; border:1px solid #334155; border-radius:4px;">
+                        <option value="1" ${item.active == 1 ? 'selected' : ''}>Bật (Hiển thị)</option>
+                        <option value="0" ${item.active == 0 ? 'selected' : ''}>Tắt (Ẩn)</option>
+                    </select>
+                </div>
             `;
             document.getElementById('btnModalSave').onclick = async () => {
                 const name = document.getElementById('m_wname').value;
@@ -429,10 +509,11 @@
                 const price_tier = document.getElementById('m_wtier').value;
                 const badge = document.getElementById('m_wbadge').value;
                 const description = document.getElementById('m_wdesc').value;
+                const active = parseInt(document.getElementById('m_wactive').value) || 0;
                 await fetch('/admin/api/wholesale/' + id, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, bottle_size, min_quantity, price_tier, badge, description, active: 1 })
+                    body: JSON.stringify({ name, bottle_size, min_quantity, price_tier, badge, description, active })
                 });
                 closeModal();
                 loadWholesale();
