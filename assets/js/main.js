@@ -15,6 +15,7 @@
     initScrollRevealObserver();
     initHeroBentoTilt();
     initCountUpCounters();
+    initMenuCarousel();
   });
 
   /**
@@ -166,4 +167,74 @@
     });
   }
 
+  /**
+   * 7. Khởi tạo Carousel hình ảnh thực tế
+   */
+  function initMenuCarousel() {
+    const $track = $('#menu-carousel-track');
+    const $slides = $('.carousel-slide');
+    const $dots = $('.carousel-dots .dot');
+    const $prevBtn = $('#carousel-prev-btn');
+    const $nextBtn = $('#carousel-next-btn');
+
+    if (!$track.length || !$slides.length) return;
+
+    let currentIndex = 0;
+    const totalSlides = $slides.length;
+    let autoPlayTimer = null;
+
+    function goToSlide(index) {
+      if (index < 0) {
+        currentIndex = totalSlides - 1;
+      } else if (index >= totalSlides) {
+        currentIndex = 0;
+      } else {
+        currentIndex = index;
+      }
+
+      $track.css('transform', `translateX(-${currentIndex * 100}%)`);
+      $slides.removeClass('active').eq(currentIndex).addClass('active');
+      $dots.removeClass('active').eq(currentIndex).addClass('active');
+    }
+
+    $prevBtn.on('click', function () {
+      goToSlide(currentIndex - 1);
+      resetAutoPlay();
+    });
+
+    $nextBtn.on('click', function () {
+      goToSlide(currentIndex + 1);
+      resetAutoPlay();
+    });
+
+    $dots.on('click', function () {
+      const slideIndex = parseInt($(this).attr('data-slide'), 10);
+      goToSlide(slideIndex);
+      resetAutoPlay();
+    });
+
+    function startAutoPlay() {
+      autoPlayTimer = setInterval(function () {
+        goToSlide(currentIndex + 1);
+      }, 4000);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+    }
+
+    function resetAutoPlay() {
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    // Tạm dừng tự động trượt khi rê chuột vào
+    $('#menu-carousel-wrapper').on('mouseenter', stopAutoPlay).on('mouseleave', startAutoPlay);
+
+    // Khởi tạo slide đầu tiên
+    goToSlide(0);
+    startAutoPlay();
+  }
+
 })();
+
