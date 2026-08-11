@@ -40,13 +40,15 @@ function toggleWholesaleFields(type) {
 async function handleContactSubmit(e) {
   e.preventDefault();
 
+  const rawQty = $('#quantity').val() || '';
   const formData = {
     name: $('#name').val(),
     phone: $('#phone').val(),
     email: $('#email').val() || '',
     inquiry_type: $('#inquiry_type').val(),
     store_name: $('#store_name').val() || '',
-    quantity: $('#quantity').val() || '',
+    quantity: rawQty,
+    expected_quantity: rawQty ? parseInt(rawQty, 10) : 0,
     message: $('#message').val()
   };
 

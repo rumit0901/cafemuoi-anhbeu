@@ -30,8 +30,19 @@ class ContactController
             $phone = trim($data['phone'] ?? '');
             $email = trim($data['email'] ?? '');
             $inquiryType = trim($data['inquiry_type'] ?? 'wholesale');
-            $expectedQuantity = isset($data['expected_quantity']) ? (int) $data['expected_quantity'] : 0;
+            
+            $expectedQuantity = 0;
+            if (isset($data['expected_quantity']) && is_numeric($data['expected_quantity'])) {
+                $expectedQuantity = (int) $data['expected_quantity'];
+            } elseif (isset($data['quantity']) && is_numeric($data['quantity'])) {
+                $expectedQuantity = (int) $data['quantity'];
+            }
+
+            $storeName = trim($data['store_name'] ?? '');
             $message = trim($data['message'] ?? '');
+            if (!empty($storeName)) {
+                $message = "[Cửa hàng/Đại lý: {$storeName}] " . $message;
+            }
 
             // Bắt buộc nhập Họ tên và Số điện thoại
             if (empty($name) || strlen($name) < 2) {

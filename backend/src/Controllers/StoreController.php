@@ -36,6 +36,7 @@ class StoreController
                     'address' => $item['address'],
                     'phone' => $item['phone'] ?? '',
                     'opening_hours' => $item['opening_hours'] ?? '',
+                    'hours' => $item['opening_hours'] ?? '',
                     'lat' => (float) $item['lat'],
                     'lng' => (float) $item['lng']
                 ];

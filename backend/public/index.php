@@ -15,6 +15,23 @@ use App\Middleware\JsonBodyParserMiddleware;
 use Slim\Factory\AppFactory;
 use Slim\Routing\RouteCollectorProxy;
 
+// Tự động tải file .env nếu tồn tại (Dành cho Production / Shared Hosting InfinityFree)
+$envPath = __DIR__ . '/../.env';
+if (file_exists($envPath)) {
+    $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '' || strpos($line, '#') === 0) continue;
+        if (strpos($line, '=') !== false) {
+            list($key, $val) = explode('=', $line, 2);
+            $key = trim($key);
+            $val = trim(trim($val), '"\'');
+            $_ENV[$key] = $val;
+            putenv("{$key}={$val}");
+        }
+    }
+}
+
 require __DIR__ . '/../vendor/autoload.php';
 
 // Khởi tạo ứng dụng Slim Framework 4

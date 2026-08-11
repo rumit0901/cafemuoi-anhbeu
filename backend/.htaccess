@@ -1,0 +1,8 @@
+# Apache Root Rewrite Rules cho Shared Hosting (InfinityFree / cPanel)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Chuyển hướng tất cả request chưa nằm trong public/ vào public/
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

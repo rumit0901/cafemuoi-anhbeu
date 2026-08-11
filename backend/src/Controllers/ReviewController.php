@@ -30,12 +30,22 @@ class ReviewController
             $reviews = $stmt->fetchAll();
 
             $formatted = array_map(function ($item) {
+                $avatar = !empty($item['avatar']) 
+                    ? $item['avatar'] 
+                    : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
+                
+                $date = !empty($item['created_at']) 
+                    ? date('d/m/Y', strtotime($item['created_at'])) 
+                    : 'Vừa xong';
+
                 return [
                     'id' => (int) $item['id'],
                     'customer' => $item['customer_name'],
+                    'avatar' => $avatar,
                     'rating' => (int) $item['rating'],
                     'comment' => $item['comment'],
-                    'type' => $item['type'] ?? 'retail'
+                    'type' => $item['type'] ?? 'retail',
+                    'date' => $date
                 ];
             }, $reviews);
 

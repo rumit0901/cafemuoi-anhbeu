@@ -247,4 +247,46 @@ class ApiTest extends TestCase
         $resDelete = $this->app->handle($reqDelete);
         $this->assertEquals(200, $resDelete->getStatusCode());
     }
+
+    /**
+     * Test xác minh chuẩn hóa hợp đồng dữ liệu API cho Frontend (Phase 4 integration)
+     */
+    public function testApiDataContractAlignment(): void
+    {
+        // 1. Test GET /api/stores trả về cả opening_hours và hours
+        $reqStores = (new RequestFactory())->createRequest('GET', '/api/stores');
+        $resStores = $this->app->handle($reqStores);
+        $this->assertEquals(200, $resStores->getStatusCode());
+        $stores = json_decode((string) $resStores->getBody(), true);
+        $this->assertNotEmpty($stores);
+        $this->assertArrayHasKey('hours', $stores[0]);
+        $this->assertArrayHasKey('opening_hours', $stores[0]);
+
+        // 2. Test GET /api/reviews trả về avatar và date
+        $reqReviews = (new RequestFactory())->createRequest('GET', '/api/reviews');
+        $resReviews = $this->app->handle($reqReviews);
+        $this->assertEquals(200, $resReviews->getStatusCode());
+        $reviews = json_decode((string) $resReviews->getBody(), true);
+        $this->assertNotEmpty($reviews);
+        $this->assertArrayHasKey('avatar', $reviews[0]);
+        $this->assertArrayHasKey('date', $reviews[0]);
+
+        // 3. Test POST /api/contact với tham số quantity thay vì expected_quantity
+        $reqContact = (new RequestFactory())
+            ->createRequest('POST', '/api/contact')
+            ->withHeader('Content-Type', 'application/json');
+        $streamContact = (new StreamFactory())->createStream(json_encode([
+            'name' => 'Đại Lý Cà Phê Mẫu',
+            'phone' => '0912345678',
+            'email' => 'daily@example.com',
+            'inquiry_type' => 'wholesale',
+            'store_name' => 'Cửa Hàng Anh Bếu Q1',
+            'quantity' => 50,
+            'message' => 'Cần báo giá sỉ chai 500ml'
+        ]));
+        $resContact = $this->app->handle($reqContact->withBody($streamContact));
+        $this->assertEquals(200, $resContact->getStatusCode());
+        $resContactBody = json_decode((string) $resContact->getBody(), true);
+        $this->assertTrue($resContactBody['success']);
+    }
 }

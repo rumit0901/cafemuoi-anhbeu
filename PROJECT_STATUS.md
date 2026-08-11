@@ -16,7 +16,7 @@
 | **Tài liệu kiến trúc** | `ARCHITECTURE.md` |
 | **Cập nhật lần cuối** | 2026-08-10 |
 | **Cập nhật bởi** | Antigravity AI Agent |
-| **Giai đoạn hiện tại** | 🟢 **Phase 4 — Tích hợp Frontend ↔ Backend** |
+| **Giai đoạn hiện tại** | 🟢 **Phase 5 — Tối ưu SEO & Performance** |
 
 ---
 
@@ -26,8 +26,8 @@
 Phase 1: Thiết kế & Lên cấu trúc                   ✅ HOÀN THÀNH
 Phase 2: Phát triển Frontend (Static HTML/CSS/JS)   ✅ HOÀN THÀNH (Đã bổ sung cấu trúc sỉ/lẻ)
 Phase 3: Phát triển Backend (PHP Slim API + CMS)   ✅ HOÀN THÀNH (API REST + CMS Admin + TDD PHPUnit Pass 100%)
-Phase 4: Tích hợp Frontend ↔ Backend               ← ĐANG Ở ĐÂY
-Phase 5: Tối ưu SEO & Performance
+Phase 4: Tích hợp Frontend ↔ Backend               ✅ HOÀN THÀNH (Đồng bộ hợp đồng API, auto dev URL & TDD Pass 100%)
+Phase 5: Tối ưu SEO & Performance                  ← ĐANG Ở ĐÂY
 Phase 6: Kiểm thử (TDD / PHPUnit / Jest)
 Phase 7: Deploy & Go Live
 ```
@@ -70,13 +70,19 @@ Phase 7: Deploy & Go Live
 - [x] Triển khai bộ API CRUD tại `/admin/api/*` cho quản trị viên quản lý kênh bán hàng, thực đơn, gói sỉ và đơn đăng ký
 - [x] Viết bộ kiểm thử TDD tự động [`tests/ApiTest.php`](file:///c:/Users/buian/Documents/App/cafemuoi.anhbeu/backend/tests/ApiTest.php) với PHPUnit 9.6 — **Đạt PASS 100% (3 test cases, 29 assertions)**
 
+### Phase 4 — Tích hợp Frontend ↔ Backend
+- [x] Chuẩn hóa hợp đồng dữ liệu REST API (Response field mapping cho `stores`, `reviews`, `contact`)
+- [x] Cấu hình tự động switch `API_BASE_URL` trong `config.js` theo môi trường localhost (`http://127.0.0.1:8000`) và production
+- [x] Xử lý linh hoạt form gửi yêu cầu báo giá sỉ & cửa hàng trong `ContactController` và `contact.page.js`
+- [x] Mở rộng bộ kiểm thử TDD tự động [`tests/ApiTest.php`](file:///c:/Users/buian/Documents/App/cafemuoi.anhbeu/backend/tests/ApiTest.php) — **Đạt PASS 100% (5 test cases, 47 assertions)**
+
 ---
 
 ## 📋 Việc cần làm tiếp theo (Next Steps)
 
-### Phase 4 — Tích hợp Frontend ↔ Backend & Deploy
-- [ ] Tích hợp API thực tế giữa Frontend và Backend (`API_BASE_URL`)
-- [ ] Chạy kiểm thử tích hợp E2E
+### Phase 5 — Tối ưu SEO & Performance
+- [ ] Tối ưu hóa SEO On-page, OpenGraph, Schema JSON-LD và Sitemap XML
+- [ ] Chạy kiểm thử E2E tích hợp nâng cao
 - [ ] Deploy backend PHP Slim lên server `cafemuoi-anhbeu.great-site.net` & import MySQL schema
 
 ---
@@ -88,3 +94,4 @@ Phase 7: Deploy & Go Live
 | 2026-08-10 | Tạo `ARCHITECTURE.md` & `PROJECT_STATUS.md` | Antigravity |
 | 2026-08-10 | Triển khai hoàn tất Phase 2 Frontend (HTML5/CSS3/jQuery/jsRender/Mapbox GL JS) | Antigravity |
 | 2026-08-10 | Hoàn tất Phase 3 Backend: PHP Slim Framework 4 REST API, CMS Admin Panel, Auth guard & bộ kiểm thử TDD PHPUnit đạt 100% Pass | Antigravity |
+| 2026-08-11 | Hoàn tất Phase 4 Tích hợp Frontend ↔ Backend API, chuẩn hóa Data Contract & bổ sung Test TDD đạt 100% Pass (5 tests, 47 assertions) | Antigravity |

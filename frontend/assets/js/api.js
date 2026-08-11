@@ -15,9 +15,12 @@ const API = {
     
     // Cấu hình headers mặc định
     const defaultHeaders = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Accept': 'application/json'
     };
+
+    if (options.body) {
+      defaultHeaders['Content-Type'] = 'application/json';
+    }
 
     try {
       // Thực hiện fetch dữ liệu từ server
