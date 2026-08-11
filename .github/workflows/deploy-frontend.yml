@@ -1,4 +1,4 @@
-name: Deploy Frontend to GitHub Pages
+name: Deploy Landing Page to GitHub Pages
 
 on:
   push:
@@ -28,10 +28,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact (Thư mục frontend)
+      - name: Upload artifact (Thư mục root)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './frontend'
+          path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment

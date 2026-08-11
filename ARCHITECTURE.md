@@ -1,6 +1,6 @@
 # Kiến Trúc Hệ Thống — Website Landing Page "Cà Phê Muối Anh Bếu"
 
-> Tài liệu mô tả kiến trúc kỹ thuật mới của dự án. Hệ thống được tối giản thành **100% Frontend Tĩnh (Static Landing Page)** hosted trên **GitHub Pages**.
+> Tài liệu mô tả kiến trúc kỹ thuật mới của dự án. Hệ thống được tối giản thành **100% Frontend Tĩnh (Static Landing Page)** hosted trực tiếp tại thư mục gốc (Root) trên **GitHub Pages**.
 
 ---
 
@@ -25,7 +25,7 @@ Giới thiệu & thúc đẩy chuyển đổi cho **2 dịch vụ cốt lõi**:
 Dự án áp dụng kiến trúc **Static Single Landing Page** tối ưu hiệu năng và chi phí vận hành:
 
 - **Hosting**: GitHub Pages (`https://cafemuoi-anhbeu.github.io/` & Custom Domain `cafemuoi-anhbeu.io.vn`).
-- **Deployment**: Tự động hóa qua GitHub Actions Workflow (`.github/workflows/deploy-frontend.yml`).
+- **Deployment**: Tự động hóa qua GitHub Actions Workflow (`.github/workflows/deploy-frontend.yml` upload trực tiếp từ root `.`).
 - **Backend Dependency**: **Không sử dụng Backend server** (No Backend API). Toàn bộ dữ liệu & hiệu ứng được xử lý 100% Client-side.
 
 ```
@@ -35,35 +35,32 @@ Dự án áp dụng kiến trúc **Static Single Landing Page** tối ưu hiệu
 [GitHub Pages CDN (cafemuoi-anhbeu.io.vn)]
        │
        ├── index.html       (SEO Schema + 2 Dịch Vụ Core + Call CTAs)
+       ├── CNAME            (Custom Domain)
        ├── assets/css/      (Glassmorphism Design System + Animations)
        └── assets/js/       (Native Observer + Tilt 3D + Counter Animation)
 ```
 
 ---
 
-## 3. Cấu Trúc Repository & Thư Mục
+## 3. Cấu Trúc Repository & Thư Mục (Đã Tối Giản)
 
 ```
 /
 ├── .github/workflows/
-│   └── deploy-frontend.yml   # GitHub Actions Workflow deploy sang GitHub Pages
+│   └── deploy-frontend.yml   # GitHub Actions Workflow deploy trực tiếp từ root sang GitHub Pages
 ├── CNAME                     # Custom domain configuration (cafemuoi-anhbeu.io.vn)
 ├── ARCHITECTURE.md           # Tài liệu kiến trúc hệ thống
 ├── PROJECT_STATUS.md         # Trạng thái dự án
 ├── index.html                # Single Landing Page chính
-├── assets/
-│   ├── css/
-│   │   └── style.css         # Styling system, responsive layout & micro-interactions
-│   ├── img/
-│   │   ├── logo.png          # Logo Cà phê muối Anh Bếu
-│   │   └── favicon.svg       # Biểu tượng Favicon
-│   └── js/
-│       ├── animations.js     # Animation engine (Reveal observer, bento tilt, count-up)
-│       └── main.js           # Smooth scroll, mobile navbar & event handlers
-└── frontend/                 # Thư mục mirror dành cho GitHub Actions deployment
-    ├── CNAME
-    ├── index.html
-    └── assets/
+└── assets/
+    ├── css/
+    │   └── style.css         # Styling system, responsive layout & micro-interactions
+    ├── img/
+    │   ├── logo.png          # Logo Cà phê muối Anh Bếu
+    │   └── favicon.svg       # Biểu tượng Favicon
+    └── js/
+        ├── animations.js     # Animation engine (Reveal observer, bento tilt, count-up)
+        └── main.js           # Smooth scroll, mobile navbar & event handlers
 ```
 
 ---
@@ -82,4 +79,4 @@ Dự án áp dụng kiến trúc **Static Single Landing Page** tối ưu hiệu
 ## 5. Quy Trình Triển Khai (Deployment)
 
 1. Mỗi lần push code lên nhánh `main`, GitHub Actions tự động kích hoạt workflow `.github/workflows/deploy-frontend.yml`.
-2. Workflow đóng gói thư mục `frontend/` thành artifact và phát hành trực tiếp lên GitHub Pages với tên miền `cafemuoi-anhbeu.io.vn`.
+2. Workflow đóng gói toàn bộ thư mục root (`.`) thành artifact và phát hành trực tiếp lên GitHub Pages với tên miền `cafemuoi-anhbeu.io.vn`.
