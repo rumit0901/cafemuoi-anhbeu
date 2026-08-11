@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Hệ Thống Cửa Hàng Cà Phê Muối Anh Bếu — Bản Đồ & Địa Chỉ</title>
+  <meta name="description" content="Tìm chi nhánh quán Cà phê muối anh Bếu gần bạn nhất tại TP. Hồ Chí Minh. Bản đồ chỉ đường Mapbox GL JS trực quan, đầy đủ địa chỉ và số điện thoại hotline.">
+
+  <!-- Google Fonts & Mapbox GL JS CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
+  
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.png">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    .stores-layout {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 0;
+      min-height: 100vh;
+      padding-top: 90px;
+    }
+    .stores-sidebar {
+      padding: 40px 30px;
+      background: #ffffff;
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      max-height: calc(100vh - 90px);
+    }
+    #map-container {
+      width: 100%;
+      height: calc(100vh - 90px);
+      background-color: #e5e7eb;
+    }
+    .store-item-card {
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: var(--transition-normal);
+      background: var(--bg-main);
+    }
+    .store-item-card:hover {
+      border-color: var(--accent-gold);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+      background: #ffffff;
+    }
+    .store-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-coffee);
+      margin-bottom: 8px;
+    }
+    .store-address {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .store-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      margin-bottom: 18px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-color);
+    }
+    .store-actions {
+      display: flex;
+      gap: 12px;
+    }
+    @media (max-width: 992px) {
+      .stores-layout { grid-template-columns: 1fr; padding-top: 80px; }
+      .stores-sidebar { max-height: none; }
+      #map-container { height: 450px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/img/logo.png" alt="Cà phê muối anh Bếu Logo" class="logo-img" onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), {className: 'logo-icon', innerHTML: '☕'}));">
+        <span>Cà phê muối anh Bếu</span>
+      </a>
+
+      <nav class="main-nav" id="main-navigation">
+        <a href="index.html" class="nav-link">Trang Chủ</a>
+        <a href="story.html" class="nav-link">Câu Chuyện</a>
+        <a href="contact.html" class="nav-link">Liên Hệ</a>
+      </nav>
+
+      <button class="mobile-toggle" id="mobile-menu-toggle">☰</button>
+    </div>
+  </header>
+
+  <div class="stores-layout">
+    <div class="stores-sidebar">
+      <div class="section-header reveal-on-scroll" style="text-align: left; margin-bottom: 30px;">
+        <span class="section-subtitle">Hệ Thống Chi Nhánh</span>
+        <h1 class="section-title" style="font-size: 2.2rem;">Địa Chỉ Cửa Hàng</h1>
+        <p class="section-description">Chọn chi nhánh gần bạn nhất để ghé thưởng thức hoặc lấy hàng sỉ trực tiếp</p>
+      </div>
+
+      <div id="stores-list-container">
+        <!-- Skeleton Loading State mặc định -->
+        <div class="skeleton-card reveal-on-scroll"><div class="skeleton-box" style="height: 100px;"></div></div>
+        <div class="skeleton-card reveal-on-scroll stagger-1" style="margin-top: 16px;"><div class="skeleton-box" style="height: 100px;"></div></div>
+      </div>
+    </div>
+
+    <!-- Mapbox GL JS Container -->
+    <div id="map-container" class="reveal-on-scroll zoom-in"></div>
+  </div>
+
+  <!-- Embed jsRender Template Cửa Hàng -->
+  <script type="text/x-jsrender" id="storeItemTemplate">
+    <div class="store-item-card amber-glow-card reveal-on-scroll" data-lat="{{:lat}}" data-lng="{{:lng}}">
+      <h3 class="store-name">{{:name}}</h3>
+      <p class="store-address">📍 {{:address}}</p>
+      <div class="store-details">
+        <div>📞 Hotline: <strong>{{:phone}}</strong></div>
+        <div>🕒 Giờ mở cửa: <strong>{{:hours}}</strong></div>
+      </div>
+      <div class="store-actions">
+        <button class="btn btn-primary btn-sm btn-focus-map" data-lat="{{:lat}}" data-lng="{{:lng}}">
+          🗺️ Xem Trên Bản Đồ
+        </button>
+      </div>
+    </div>
+  </script>
+
+  <!-- SCRIPTS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/pages/stores.page.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script> $('#mobile-menu-toggle').on('click', function() { $('#main-navigation').toggleClass('active'); }); </script>
+</body>
+</html>

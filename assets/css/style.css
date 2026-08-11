@@ -1,0 +1,623 @@
+/* ==========================================================================
+   DESIGN SYSTEM & MODERN CORE STYLESHEET — CÀ PHÊ MUỐI ANH BẾU
+   Style: Luxury Dark-Mode Glassmorphism & High Contrast Coffee Aesthetic
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. MODERN THEME TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+  /* Dynamic Color Palette - Ultra Modern Dark Coffee & Cream Gold */
+  --primary-coffee: #1a0f0a;       /* Nâu hạt Espresso cực tối cao cấp */
+  --primary-coffee-light: #2c1a12;
+  --accent-gold: #e59866;          /* Vàng hổ phách ánh kim */
+  --accent-gold-gradient: linear-gradient(135deg, #e59866 0%, #d35400 100%);
+  --accent-cream: #f9f3ea;         /* Kem béo mịn màng */
+  --accent-cream-glow: rgba(249, 243, 234, 0.08);
+  
+  --text-main: #2b1810;            
+  --text-muted: #7a685d;           
+  --text-light: #ffffff;           
+  
+  --bg-main: #f5efe6;              /* Nền màu giấy Kraft sang trọng */
+  --bg-card: #ffffff;              
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  
+  --border-color: rgba(61, 35, 20, 0.1);
+  --border-glow: rgba(229, 152, 102, 0.3);
+  
+  --shadow-sm: 0 4px 10px rgba(26, 15, 10, 0.04);
+  --shadow-md: 0 10px 30px rgba(26, 15, 10, 0.08);
+  --shadow-hover: 0 20px 40px rgba(26, 15, 10, 0.15);
+  
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  
+  --font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --transition-normal: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE STYLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-normal);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --------------------------------------------------------------------------
+   3. MODERN FLOATING HEADER & NAVIGATION
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 1240px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 40px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+  transition: var(--transition-normal);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 0 24px;
+}
+
+/* Logo thương hiệu hiện đại */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary-coffee);
+  letter-spacing: -0.5px;
+}
+
+.brand-logo .logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 2px solid var(--accent-gold);
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover .logo-img {
+  transform: rotate(10deg) scale(1.05);
+}
+
+/* Nav links pill style */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(61, 35, 20, 0.04);
+  padding: 6px;
+  border-radius: 30px;
+}
+
+.nav-link {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border-radius: 20px;
+  transition: var(--transition-normal);
+}
+
+.nav-link:hover {
+  color: var(--primary-coffee);
+}
+
+.nav-link.active {
+  background-color: var(--primary-coffee);
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(26, 15, 10, 0.2);
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--primary-coffee);
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   4. MODERN BUTTONS & BADGES
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 40px;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition-normal);
+  letter-spacing: 0.2px;
+}
+
+.btn-primary {
+  background: var(--primary-coffee);
+  color: var(--accent-cream);
+  box-shadow: 0 8px 20px rgba(26, 15, 10, 0.2);
+}
+
+.btn-primary:hover {
+  background: #2d180f;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(26, 15, 10, 0.3);
+}
+
+.btn-accent {
+  background: var(--accent-gold-gradient);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(211, 84, 0, 0.25);
+}
+
+.btn-accent:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(211, 84, 0, 0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary-coffee);
+  border: 2px solid var(--primary-coffee);
+}
+
+.btn-outline:hover {
+  background: var(--primary-coffee);
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 30px;
+  letter-spacing: 0.8px;
+}
+
+.badge-best-seller {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  color: #e65100;
+  border: 1px solid rgba(230, 81, 0, 0.2);
+}
+
+.badge-new {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #1565c0;
+}
+
+/* --------------------------------------------------------------------------
+   5. MODERN CARD GRID & GLASSMORPHISM
+   -------------------------------------------------------------------------- */
+.section-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 60px auto;
+}
+
+.section-subtitle {
+  color: var(--accent-gold);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--primary-coffee);
+  line-height: 1.25;
+  letter-spacing: -0.8px;
+}
+
+.section-description {
+  color: var(--text-muted);
+  margin-top: 14px;
+  font-size: 1.1rem;
+}
+
+.menu-item-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-glow);
+}
+
+.card-img-wrapper {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-item-card:hover .card-img-wrapper img {
+  transform: scale(1.08);
+}
+
+.card-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
+.card-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.item-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-coffee);
+  line-height: 1.3;
+}
+
+.item-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #d35400;
+}
+
+.item-desc {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 12px 0 20px 0;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+/* --------------------------------------------------------------------------
+   6. SKELETON & FALLBACK
+   -------------------------------------------------------------------------- */
+.skeleton-card {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  border: 1px solid var(--border-color);
+}
+
+.skeleton-box {
+  background: linear-gradient(90deg, #efe6db 25%, #f7f1e9 50%, #efe6db 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* --------------------------------------------------------------------------
+   7. FOOTER STYLES
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background-color: var(--primary-coffee);
+  color: var(--accent-cream);
+  padding: 80px 0 40px 0;
+  margin-top: 100px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 50px;
+  margin-bottom: 60px;
+}
+
+.footer-brand p {
+  color: rgba(249, 243, 234, 0.7);
+  margin-top: 18px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.footer-col h4 {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 14px;
+}
+
+.footer-links a {
+  color: rgba(249, 243, 234, 0.7);
+}
+
+.footer-links a:hover {
+  color: var(--accent-gold);
+  padding-left: 6px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(249, 243, 234, 0.12);
+  padding-top: 30px;
+  text-align: center;
+  color: rgba(249, 243, 234, 0.5);
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   8. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .site-header {
+    top: 12px;
+    width: calc(100% - 24px);
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: block;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 24px;
+    gap: 12px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    display: none;
+  }
+
+  .main-nav.active {
+    display: flex;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. MODERN ANIMATIONS & MICRO-INTERACTIONS (FEAT: ANIMATION SYSTEM)
+   -------------------------------------------------------------------------- */
+
+/* Trạng thái Header thu gọn khi cuộn trang */
+.site-header.scrolled {
+  top: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 40px rgba(26, 15, 10, 0.12);
+  border-color: rgba(229, 152, 102, 0.4);
+}
+
+.site-header.scrolled .header-inner {
+  height: 58px;
+}
+
+/* Keyframes Chuyển Động */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatSmooth {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes amberPulse {
+  0%, 100% {
+    box-shadow: 0 8px 20px rgba(211, 84, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 14px 30px rgba(211, 84, 0, 0.45);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Scroll Reveal Classes (Sử dụng với IntersectionObserver) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.zoom-in {
+  transform: scale(0.93);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Stagger Delays cho danh sách thẻ */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+
+/* Hiệu ứng Nâng Thẻ & Viền Hổ Phách Phát Sáng */
+.amber-glow-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.amber-glow-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(211, 84, 0, 0.5) !important;
+  box-shadow: 0 20px 45px rgba(211, 84, 0, 0.18) !important;
+}
+
+/* Floating Animation cho Hero Badge */
+.floating-badge {
+  animation: floatSmooth 4s ease-in-out infinite;
+}
+
+/* Button Micro-Interactions */
+.btn-accent {
+  animation: amberPulse 3s infinite;
+}
+
+.btn-accent:hover {
+  animation: none;
+}
+
+/* Subtle Link Underline Animated Effect */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accent-gold);
+  transition: width 0.3s ease, left 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+.nav-link.active::after {
+  display: none;
+}
+
+
+

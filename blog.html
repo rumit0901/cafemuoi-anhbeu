@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tin Tức & Khuyến Mãi — Cà Phê Muối Anh Bếu</title>
+  <meta name="description" content="Cập nhật tin tức mới nhất, mẹo thưởng thức cà phê và các chương trình khuyến mãi ưu đãi từ Cà Phê Muối Anh Bếu.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.png">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .blog-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+    }
+    .blog-img {
+      height: 200px;
+      overflow: hidden;
+    }
+    .blog-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .blog-content {
+      padding: 20px;
+    }
+    .blog-title {
+      font-size: 1.2rem;
+      color: var(--primary-coffee);
+      margin-bottom: 10px;
+    }
+    .blog-excerpt {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo"><img src="assets/img/logo.png" alt="Cà phê muối anh Bếu Logo" class="logo-img" onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), {className: 'logo-icon', innerHTML: '☕'}));"><span>Cà phê muối anh Bếu</span></a>
+      <nav class="main-nav" id="main-navigation">
+        <a href="index.html" class="nav-link">Trang Chủ</a>
+        <a href="story.html" class="nav-link">Câu Chuyện</a>
+        <a href="contact.html" class="nav-link">Liên Hệ</a>
+      </nav>
+      <button class="mobile-toggle" id="mobile-menu-toggle">☰</button>
+    </div>
+  </header>
+
+  <section style="padding: 150px 0 90px 0;">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-subtitle">Blog, Khuyến Mãi & Chính Sách Sỉ</span>
+        <h1 class="section-title">Tin Tức & Kinh Nghiệm</h1>
+        <p class="section-description">Cập nhật chính sách đại lý, ưu đãi mới nhất và bí kíp thưởng thức cà phê muối</p>
+      </div>
+
+      <div id="blog-container" class="blog-grid">
+        <!-- Static Fallback Content cho SEO Crawler -->
+        <article class="blog-card amber-glow-card reveal-on-scroll">
+          <div class="blog-img">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80" alt="Chính sách đại lý sỉ">
+          </div>
+          <div class="blog-content">
+            <h3 class="blog-title">🔥 Chính Sách Đại Lý & Phân Phối Sỉ Cà Phê Muối Đóng Chai 2026</h3>
+            <p class="blog-excerpt">Tìm hiểu chính sách chiết khấu, hỗ trợ vận chuyển và quy trình trở thành đại lý phân phối cà phê muối Anh Bếu.</p>
+            <a href="contact.html?type=wholesale" class="btn btn-outline btn-sm">Xem chi tiết →</a>
+          </div>
+        </article>
+
+        <article class="blog-card amber-glow-card reveal-on-scroll stagger-1">
+          <div class="blog-img">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&auto=format&fit=crop&q=80" alt="Mẹo thưởng thức cà phê muối">
+          </div>
+          <div class="blog-content">
+            <h3 class="blog-title">☕ 3 Bước Thưởng Thức Cà Phê Muối Chuẩn Vị Anh Bếu</h3>
+            <p class="blog-excerpt">Nên nếm lớp bọt kem trước hay khuấy đều lên? Cùng khám phá bí kíp nếm trọn hương vị tuyệt hảo nhé!</p>
+            <a href="#" class="btn btn-outline btn-sm">Đọc tiếp →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container"><div class="footer-bottom"><p>&copy; 2026 Cà Phê Muối Anh Bếu. All rights reserved.</p></div></div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+
+  <!-- Embed jsRender Template Blog Card -->
+  <script type="type/x-jsrender" id="blogCardTemplate">
+    <article class="blog-card amber-glow-card reveal-on-scroll">
+      <div class="blog-img">
+        <img src="{{:image}}" alt="{{:title}}">
+      </div>
+      <div class="blog-content">
+        <h3 class="blog-title">{{:title}}</h3>
+        <p class="blog-excerpt">{{:excerpt}}</p>
+        <a href="contact.html?type=wholesale" class="btn btn-outline btn-sm">Xem chi tiết →</a>
+      </div>
+    </article>
+  </script>
+
+  <script src="assets/js/pages/blog.page.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script> $('#mobile-menu-toggle').on('click', function() { $('#main-navigation').toggleClass('active'); }); </script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <title>Cà Phê Muối Anh Bếu — Chuẩn Vị Kem Muối Béo Ngậy Đậm Đà Sài Gòn</title>
+  <meta name="description" content="Thương hiệu Cà phê muối anh Bếu nổi tiếng với lớp kem muối béo ngậy kết hợp cà phê Robusta nguyên chất đậm đà chuẩn vị. Đặt ngay hoặc tìm chi nhánh gần nhất!">
+  <meta name="keywords" content="cà phê muối, cà phê muối anh bếu, cà phê sài gòn, kem muối, cà phê ngon sài gòn, quán cà phê muối">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cafemuoi-anhbeu.github.io/">
+  <meta property="og:title" content="Cà Phê Muối Anh Bếu — Chuẩn Vị Kem Muối Béo Ngậy Đậm Đà Sài Gòn">
+  <meta property="og:description" content="Thương hiệu Cà phê muối anh Bếu nổi tiếng với lớp kem muối béo ngậy đậm đà. Thử ngay hôm nay!">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=1200&auto=format&fit=crop&q=80">
+
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo.png">
+
+  <!-- Google Fonts Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Modern Custom Page Styling -->
+  <style>
+    .hero-section {
+      padding: 150px 0 90px 0;
+      background: radial-gradient(circle at 80% 20%, rgba(229, 152, 102, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 10% 80%, rgba(61, 35, 20, 0.08) 0%, transparent 50%);
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: rgba(229, 152, 102, 0.15);
+      border: 1px solid rgba(229, 152, 102, 0.3);
+      border-radius: 30px;
+      color: #d35400;
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: 3.8rem;
+      font-weight: 800;
+      color: var(--primary-coffee);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #d35400 0%, #e59866 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-bento-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(26, 15, 10, 0.2);
+      border: 6px solid #ffffff;
+      transform: rotate(2deg);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-bento-card:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    .hero-bento-card img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+    }
+
+    .floating-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 14px 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .floating-badge strong {
+      color: var(--primary-coffee);
+      font-size: 1rem;
+    }
+
+    .floating-badge span {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-title {
+        font-size: 2.8rem;
+      }
+    }
+  </style>
+
+  <!-- Schema.org JSON-LD Structured Data cho Thương Hiệu & Quán Cà Phê -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Cà Phê Muối Anh Bếu",
+    "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=1200&auto=format&fit=crop&q=80",
+    "url": "https://cafemuoi-anhbeu.github.io/",
+    "telephone": "0905382080",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "TP. Hồ Chí Minh",
+      "addressCountry": "VN"
+    },
+    "description": "Thương hiệu Cà phê muối anh Bếu nổi tiếng với lớp kem muối béo ngậy kết hợp cà phê Robusta nguyên chất đậm đà chuẩn vị.",
+    "openingHours": "Mo-Su 07:00-20:30"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- HEADER NAVIGATION -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo" id="brand-logo-link">
+        <img src="assets/img/logo.png" alt="Cà phê muối anh Bếu Logo" class="logo-img" onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), {className: 'logo-icon', innerHTML: '☕'}));">
+        <span>Cà phê muối anh Bếu</span>
+      </a>
+
+      <!-- Menu Điều Hướng Minimalist -->
+      <nav class="main-nav" id="main-navigation">
+        <a href="index.html" class="nav-link active" id="nav-home">Trang Chủ</a>
+        <a href="story.html" class="nav-link" id="nav-story">Câu Chuyện</a>
+        <a href="contact.html" class="nav-link" id="nav-contact">Liên Hệ</a>
+      </nav>
+
+      <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO SECTION BENO MODERN -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content reveal-on-scroll">
+        <span class="hero-tag">✨ Thương hiệu Cà Phê Muối Sỉ & Lẻ Uy Tín</span>
+        <h1 class="hero-title">Đậm Vị Cà Phê,<br><span>Béo Mặn Kem Muối</span></h1>
+        <p class="hero-subtitle">Thưởng thức ly cà phê muối Anh Bếu béo ngậy chuẩn vị Sài Gòn. Chuyên cung cấp sỉ cà phê muối đóng chai số lượng lớn cho quán cafe, đại lý & sự kiện.</p>
+        <div class="hero-buttons">
+          <a href="index.html#channels-container" class="btn btn-accent" id="btn-hero-order">🛵 Đặt Hàng Giao Tận Nơi</a>
+          <a href="contact.html?type=wholesale" class="btn btn-outline" id="btn-hero-wholesale">📦 Đăng Ký Báo Giá Sỉ</a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper reveal-on-scroll zoom-in stagger-2">
+        <div class="hero-bento-card">
+          <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=900&auto=format&fit=crop&q=80" alt="Cà phê muối Anh Bếu béo ngậy">
+          <div class="floating-badge">
+            <strong>4.9 / 5.0 ⭐⭐⭐⭐⭐</strong>
+            <span>> <strong class="stat-counter" data-target="10000">10,000</strong>+ Ly Phục Vụ Mỗi Tháng</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: CUNG CẤP SỈ CÀ PHÊ MUỐI ĐÓNG CHAI -->
+  <section style="padding: 60px 0; background: #fffcf8; border-top: 1px solid #e6d7c3; border-bottom: 1px solid #e6d7c3;">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-subtitle">Dịch Vụ Sỉ Đóng Chai Tận Nơi</span>
+        <h2 class="section-title">Cung Cấp Sỉ Cà Phê Muối Đóng Chai</h2>
+        <p class="section-description">Giải pháp hoàn hảo cho các quán cafe, sự kiện, tiệc cưới & đại lý phân phối với chiết khấu vô cùng hấp dẫn.</p>
+      </div>
+
+      <div id="wholesale-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <!-- Skeleton Loading State -->
+        <div class="skeleton-card reveal-on-scroll"><div class="skeleton-box" style="height: 120px; margin-bottom: 12px;"></div><div class="skeleton-box" style="height: 24px; width: 60%;"></div></div>
+        <div class="skeleton-card reveal-on-scroll stagger-2"><div class="skeleton-box" style="height: 120px; margin-bottom: 12px;"></div><div class="skeleton-box" style="height: 24px; width: 60%;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: KÊNH BÁN HÀNG BÁN LẺ DÀNH CHO KHÁCH HÀNG -->
+  <section style="padding: 60px 0;">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-subtitle">Giao Hàng Tận Nơi 15 Phút</span>
+        <h2 class="section-title">Đặt Hàng Qua Ứng Dụng Đối Tác</h2>
+        <p class="section-description">Chọn ứng dụng giao đồ ăn yêu thích của bạn để nhận ngay ly cà phê muối thơm ngon béo ngậy!</p>
+      </div>
+
+      <div id="channels-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
+        <!-- Skeleton Loading State -->
+        <div class="skeleton-card reveal-on-scroll"><div class="skeleton-box" style="height: 80px;"></div></div>
+        <div class="skeleton-card reveal-on-scroll stagger-1"><div class="skeleton-box" style="height: 80px;"></div></div>
+        <div class="skeleton-card reveal-on-scroll stagger-2"><div class="skeleton-box" style="height: 80px;"></div></div>
+        <div class="skeleton-card reveal-on-scroll stagger-3"><div class="skeleton-box" style="height: 80px;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid reveal-on-scroll">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="color: #fff;">
+            <img src="assets/img/logo.png" alt="Cà phê muối anh Bếu Logo" class="logo-img" onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), {className: 'logo-icon', innerHTML: '☕'}));">
+            <span>Cà phê muối anh Bếu</span>
+          </a>
+          <p>Thương hiệu Cà phê muối béo ngậy hàng đầu Sài Gòn. Chuyên cung cấp sỉ đóng chai cho đại lý & phục vụ bán lẻ tận nơi.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Điều Hướng</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="story.html">Câu Chuyện Thương Hiệu</a></li>
+            <li><a href="contact.html">Liên Hệ & Đăng Ký Sỉ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Dịch Vụ</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html?type=wholesale">Đăng Ký Báo Giá Sỉ</a></li>
+            <li><a href="index.html#channels-container">Đặt Hàng Bán Lẻ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Hotline & Giờ Mở Cửa</h4>
+          <p style="color: rgba(244, 232, 211, 0.8); margin-bottom: 8px;">📞 Hotline Sỉ & Lẻ: 0905 382 080</p>
+          <p style="color: rgba(244, 232, 211, 0.8);">🕒 Mở cửa: 07:00 - 20:30 mỗi ngày</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Cà Phê Muối Anh Bếu. All rights reserved. Designed with ❤️ for coffee lovers.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT INCLUDES (QUY ƯỚC ARCHITECTURE.MD) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js"></script>
+  
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+
+  <!-- Embed jsRender Template cho Kênh Bán Hàng đối tác -->
+  <script type="text/x-jsrender" id="channelTemplate">
+    <div class="amber-glow-card reveal-on-scroll" style="background: #fff; padding: 24px; border-radius: 16px; text-align: center; border: 1px solid #e6d7c3; box-shadow: var(--shadow-sm);">
+      <img src="{{:logo}}" alt="{{:name}}" style="width: 50px; height: 50px; border-radius: 12px; object-fit: cover; margin-bottom: 12px;" onerror="this.src='https://images.unsplash.com/photo-1526367790999-0150786686a2?w=100&auto=format&fit=crop&q=80'">
+      <h3 style="font-size: 1.2rem; color: var(--primary-coffee); margin-bottom: 8px;">{{:name}}</h3>
+      {{if badge}}
+        <span style="display: inline-block; background: #fff3ed; color: #d35400; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;">{{:badge}}</span>
+      {{/if}}
+      <br>
+      <a href="{{:url}}" target="_blank" rel="noopener" class="btn btn-accent btn-sm" style="width: 100%;">Đặt Trên {{:name}}</a>
+    </div>
+  </script>
+
+  <!-- Embed jsRender Template cho Sản Phẩm Sỉ Đóng Chai -->
+  <script type="text/x-jsrender" id="wholesaleItemTemplate">
+    <div class="amber-glow-card reveal-on-scroll" style="border: 2px dashed #d35400; border-radius: 16px; padding: 30px; background: #fffcf8;">
+      <span style="background: #d35400; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">📦 {{:bottle_size}}</span>
+      <h3 style="color: var(--primary-coffee); font-size: 1.4rem; margin: 16px 0 10px 0;">{{:name}}</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">{{:description}}</p>
+      <ul style="list-style: none; color: var(--text-main); font-size: 0.9rem; margin-bottom: 20px;">
+        <li style="margin-bottom: 6px;">✅ Số lượng: {{:min_quantity}}</li>
+        <li style="margin-bottom: 6px;">✅ Chính sách: {{:price_tier}}</li>
+      </ul>
+      <a href="contact.html?type=wholesale" class="btn btn-primary" style="width: 100%; text-align: center;">📩 Đăng Ký Báo Giá Sỉ</a>
+    </div>
+  </script>
+
+  <script src="assets/js/pages/home.page.js"></script>
+  <script src="assets/js/animations.js"></script>
+  
+  <script>
+    // Logic toggle mobile menu nav
+    $('#mobile-menu-toggle').on('click', function() {
+      $('#main-navigation').toggleClass('active');
+    });
+  </script>
+</body>
+</html>
